@@ -1,4 +1,5 @@
 #include "CalculatorAppLaunch.h"
+wxIMPLEMENT_APP(CalculatorAppLaunch);
 
 CalculatorAppLaunch::CalculatorAppLaunch()
 {
