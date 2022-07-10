@@ -9,10 +9,13 @@ CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculato
 ////Code for Cosmetics////
 	std::string buttonLabels[] = { "+/-", "0",".","=","1","2","3","+","4","5","6","-","7","8","9","*","x^2","|x|","mod (%)","/","Hex","Dec","Bin","C" };
 	//Ideally space is for colors/color dialogs, pencolors/fonts etc.
+	wxFont calculatorDisplayFont(72, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD,false);
+	wxFont calculatorButtonFont(45, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_MEDIUM, false);
 ////End Code for Cosmetics////
 	
 
 	displayTextbox = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(0,0), wxSize(500, 200));
+	displayTextbox->SetFont(calculatorDisplayFont);
 
 
 	ButtonNeg = new wxButton(this, 100, buttonLabels[0], wxPoint(0, 700), wxSize(125, 100));
