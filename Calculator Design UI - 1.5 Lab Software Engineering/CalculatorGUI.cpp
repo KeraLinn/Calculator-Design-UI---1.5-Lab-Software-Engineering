@@ -1,5 +1,6 @@
 #include "CalculatorGUI.h"
 
+
 wxBEGIN_EVENT_TABLE(CalculatorGUI, wxFrame)
 //blank until begin assigning functions for diff buttons.
 wxEND_EVENT_TABLE()
