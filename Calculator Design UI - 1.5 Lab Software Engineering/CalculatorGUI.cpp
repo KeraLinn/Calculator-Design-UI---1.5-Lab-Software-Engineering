@@ -1,10 +1,10 @@
 #include "CalculatorGUI.h"
 
 wxBEGIN_EVENT_TABLE(CalculatorGUI, wxFrame)
-	//blank until begin assigning functions for diff buttons.
+//blank until begin assigning functions for diff buttons.
 wxEND_EVENT_TABLE()
 
-CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculator", wxPoint(400, 150), wxSize(500, 800)) {
+CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculator", wxPoint(400, 150), wxSize(500, 845)) {
 
 ////Code for Cosmetics////
 	std::string buttonLabels[] = { "+/-", "0",".","=","1","2","3","+","4","5","6","-","7","8","9","*","x^2","|x|","mod (%)","/","Hex","Dec","Bin","C" };
@@ -14,7 +14,7 @@ CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculato
 ////End Code for Cosmetics////
 	
 
-	displayTextbox = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(0,0), wxSize(500, 200));
+	displayTextbox = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(0, 0), wxSize(500, 200));
 	displayTextbox->SetFont(calculatorDisplayFont);
 
 
