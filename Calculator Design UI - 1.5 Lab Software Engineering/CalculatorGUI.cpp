@@ -1,5 +1,5 @@
 #include "CalculatorGUI.h"
-
+#include "ButtonFactory.h"
 
 wxBEGIN_EVENT_TABLE(CalculatorGUI, wxFrame)
 //EVT_BUTTON(100, CalculatorGUI::onButtonClick)
@@ -16,13 +16,19 @@ CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculato
 	wxFont calculatorButtonFont(45, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_MEDIUM, false);
 ////End Code for Cosmetics////
 	
+	ButtonFactory factory;
 
 	displayTextbox = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(0, 0), wxSize(500, 200));
 	displayTextbox->SetFont(calculatorDisplayFont);
+	
+	wxButton* Button0 = factory.CreateButton0(this, wxPoint(125,700));
+	Button0->SetParent(this);
+	
+	
 
 #pragma region Button Creation
-	ButtonNeg = new wxButton(this, 100, "+/-", wxPoint(0, 700), wxSize(125, 100));
-	Button0 = new wxButton(this, 101, "0", wxPoint(125, 700), wxSize(125, 100));
+
+	//Button0 = new wxButton(this, 101, "0", wxPoint(125, 700), wxSize(125, 100));
 	ButtonDot = new wxButton(this, 102, ".", wxPoint(250, 700), wxSize(125, 100));
 	ButtonEquals = new wxButton(this, 103, "=", wxPoint(375, 700), wxSize(125, 100));
 
