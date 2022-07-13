@@ -1,57 +1,50 @@
 #include "CalculatorGUI.h"
-
+#include "ButtonFactory.h"
 
 wxBEGIN_EVENT_TABLE(CalculatorGUI, wxFrame)
-//EVT_BUTTON(100, CalculatorGUI::onButtonClick)
-//EVT_BUTTON(100-122,CalculatorGUI::onButtonClick)
 EVT_COMMAND_RANGE(100,123,wxEVT_COMMAND_BUTTON_CLICKED, CalculatorGUI::onButtonClick)
+
 wxEND_EVENT_TABLE()
 
 CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculator", wxPoint(400, 150), wxSize(500, 845)) {
 
 ////Code for Cosmetics////
-	std::string buttonLabels[] = { "+/-", "0",".","=","1","2","3","+","4","5","6","-","7","8","9","*","x^2","|x|","mod (%)","/","Hex","Dec","Bin","C" };
 	//Ideally space is for colors/color dialogs, pencolors/fonts etc.
 	wxFont calculatorDisplayFont(72, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD,false);
-	wxFont calculatorButtonFont(45, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_MEDIUM, false);
 ////End Code for Cosmetics////
 	
-
-	displayTextbox = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(0, 0), wxSize(500, 200));
+	displayTextbox = new wxTextCtrl(this, 5000, " ", wxPoint(0, 0), wxSize(500, 200));
 	displayTextbox->SetFont(calculatorDisplayFont);
 
-#pragma region Button Creation
-	ButtonNeg = new wxButton(this, 100, "+/-", wxPoint(0, 700), wxSize(125, 100));
-	Button0 = new wxButton(this, 101, "0", wxPoint(125, 700), wxSize(125, 100));
-	ButtonDot = new wxButton(this, 102, ".", wxPoint(250, 700), wxSize(125, 100));
-	ButtonEquals = new wxButton(this, 103, "=", wxPoint(375, 700), wxSize(125, 100));
-
-	Button1 = new wxButton(this, 104, "1", wxPoint(0, 600), wxSize(125, 100));
-	Button2 = new wxButton(this, 105, "2", wxPoint(125, 600), wxSize(125, 100));
-	Button3 = new wxButton(this, 106, "3", wxPoint(250, 600), wxSize(125, 100));
-	ButtonPlus = new wxButton(this, 107, "+", wxPoint(375, 600), wxSize(125, 100));
-
-	Button4 = new wxButton(this, 108, "4", wxPoint(0, 500), wxSize(125, 100));
-	Button5 = new wxButton(this, 109, "5", wxPoint(125, 500), wxSize(125, 100));
-	Button6 = new wxButton(this, 110, "6", wxPoint(250, 500), wxSize(125, 100));
-	ButtonMinus = new wxButton(this, 111, "-", wxPoint(375, 500), wxSize(125, 100));
-
-	Button7 = new wxButton(this, 112, "7", wxPoint(0, 400), wxSize(125, 100));
-	Button8 = new wxButton(this, 113, "8", wxPoint(125, 400), wxSize(125, 100));
-	Button9 = new wxButton(this, 114, "9", wxPoint(250, 400), wxSize(125, 100));
-	ButtonMult = new wxButton(this, 115, "*", wxPoint(375, 400), wxSize(125, 100));
-
-	ButtonSquared = new wxButton(this, 116, "x^2", wxPoint(0, 300), wxSize(125, 100));
-	ButtonAbsVal = new wxButton(this, 117, "|x|", wxPoint(125, 300), wxSize(125, 100));
-	ButtonMod = new wxButton(this, 118, "mod (%)", wxPoint(250, 300), wxSize(125, 100));
-	ButtonDiv = new wxButton(this, 119, "/", wxPoint(375, 300), wxSize(125, 100));
-
-	ButtonHex = new wxButton(this, 120, "Hex", wxPoint(0, 200), wxSize(125, 100));
-	ButtonDec = new wxButton(this, 121, "Dec", wxPoint(125, 200), wxSize(125, 100));
-	ButtonBin = new wxButton(this, 122, "Bin", wxPoint(250, 200), wxSize(125, 100));
-	ButtonClear = new wxButton(this, 123, "C", wxPoint(375, 200), wxSize(125, 100));
+#pragma region Button Factory
+	ButtonFactory factory;
+	wxButton* ButtonNeg = factory.CreateButtonNeg(this);
+	wxButton* Button0 = factory.CreateButton0(this);
+	wxButton* ButtonDot = factory.CreateButtonDot(this);
+	wxButton* ButtonEquals = factory.CreateButtonEquals(this);
+	wxButton* Button1 = factory.CreateButton1(this);
+	wxButton* Button2 = factory.CreateButton2(this);
+	wxButton* Button3 = factory.CreateButton3(this);
+	wxButton* ButtonPlus = factory.CreateButtonPlus(this);
+	wxButton* Button4 = factory.CreateButton4(this);
+	wxButton* Button5 = factory.CreateButton5(this);
+	wxButton* Button6 = factory.CreateButton6(this);
+	wxButton* ButtonMinus = factory.CreateButtonMinus(this);
+	wxButton* Button7 = factory.CreateButton7(this);
+	wxButton* Button8 = factory.CreateButton8(this);
+	wxButton* Button9 = factory.CreateButton9(this);
+	wxButton* ButtonMult = factory.CreateButtonMult(this);
+	wxButton* ButtonSquared = factory.CreateButtonSquared(this);
+	wxButton* ButtonAbsVal = factory.CreateButtonAbsVal(this);
+	wxButton* ButtonMod = factory.CreateButtonMod(this);
+	wxButton* ButtonDiv = factory.CreateButtonDiv(this);
+	wxButton* ButtonHex = factory.CreateButtonHex(this);
+	wxButton* ButtonDec = factory.CreateButtonDec(this);
+	wxButton* ButtonBin = factory.CreateButtonBin(this);
+	wxButton* ButtonClear = factory.CreateButtonClear(this);
 #pragma endregion
 
+	
 }
 
 CalculatorGUI::~CalculatorGUI()
@@ -60,9 +53,10 @@ CalculatorGUI::~CalculatorGUI()
 }
 
 void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
-	int id = evt.GetId();
+	int theID = evt.GetId();
+
 	wxString buttonLabels2[] = {"+/-", "0",".","=","1","2","3","+","4","5","6","-","7","8","9","*","x^2","|x|","mod (%)","/","Hex","Dec","Bin","C"};
-	switch (id) {
+	switch (theID) {
 	case 100: {displayTextbox->AppendText(buttonLabels2[0]); break; }
 	case 101: {displayTextbox->AppendText(buttonLabels2[1]); break; }
 	case 102: {displayTextbox->AppendText(buttonLabels2[2]); break; }
@@ -86,7 +80,7 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 	case 120: {displayTextbox->AppendText(buttonLabels2[20]); break; }
 	case 121: {displayTextbox->AppendText(buttonLabels2[21]); break; }
 	case 122: {displayTextbox->AppendText(buttonLabels2[22]); break; }
-	case 123: {displayTextbox->AppendText(buttonLabels2[23]); break; } //this should actually clear the screen, but displayTextBox->Clear() doesn't do it yet.
+	case 123: {displayTextbox->Clear(); break; }
 	}
 
 }

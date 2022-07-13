@@ -5,6 +5,7 @@ class CalculatorGUI : public wxFrame
 {
 public:
 	CalculatorGUI();
+
 	~CalculatorGUI();
 
 private:
@@ -14,6 +15,7 @@ public:
 	int xWidth = 4;
 	int yHeight = 6;
 	wxTextCtrl* displayTextbox = nullptr;
+	
 
 	void onButtonClick(wxCommandEvent& evt);
 	

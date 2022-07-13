@@ -138,10 +138,12 @@
     <ClInclude Include="..\..\..\..\..\..\SDKs-WXWidgets\include\wx\wx.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="ButtonFactory.h" />
     <ClInclude Include="CalculatorAppLaunch.h" />
     <ClInclude Include="CalculatorGUI.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ButtonFactory.cpp" />
     <ClCompile Include="CalculatorAppLaunch.cpp" />
     <ClCompile Include="CalculatorGUI.cpp" />
   </ItemGroup>
