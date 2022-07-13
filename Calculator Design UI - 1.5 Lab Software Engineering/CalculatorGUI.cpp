@@ -21,11 +21,10 @@ CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculato
 	displayTextbox = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(0, 0), wxSize(500, 200));
 	displayTextbox->SetFont(calculatorDisplayFont);
 	
-	wxButton* Button0 = factory.CreateButton0(this, wxPoint(125,700));
-	Button0->SetParent(this);
-	
-	
+	wxButton* Button0 = factory.CreateButton0(this);
 
+	
+/*
 #pragma region Button Creation
 
 	//Button0 = new wxButton(this, 101, "0", wxPoint(125, 700), wxSize(125, 100));
@@ -57,7 +56,7 @@ CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculato
 	ButtonBin = new wxButton(this, 122, "Bin", wxPoint(250, 200), wxSize(125, 100));
 	ButtonClear = new wxButton(this, 123, "C", wxPoint(375, 200), wxSize(125, 100));
 #pragma endregion
-
+*/
 }
 
 CalculatorGUI::~CalculatorGUI()

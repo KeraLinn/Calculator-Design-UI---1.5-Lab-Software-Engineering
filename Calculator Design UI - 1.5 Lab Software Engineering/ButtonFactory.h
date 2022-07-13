@@ -4,7 +4,12 @@
 
 class ButtonFactory
 {
+private:
+	wxWindowBase* _parentWindow;
+
 public:
-	wxButton* CreateButton0(wxWindow parentWindow, wxPoint pt);
+	wxButton* CreateButton0(CalculatorGUI* parentWindow);
+
+
 };
 
