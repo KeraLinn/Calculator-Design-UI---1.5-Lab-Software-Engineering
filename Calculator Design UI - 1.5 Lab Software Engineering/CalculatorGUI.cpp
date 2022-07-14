@@ -1,5 +1,6 @@
 #include "CalculatorGUI.h"
 #include "ButtonFactory.h"
+#include "CalculatorProcessor.h"
 
 wxBEGIN_EVENT_TABLE(CalculatorGUI, wxFrame)
 EVT_COMMAND_RANGE(100,123,wxEVT_COMMAND_BUTTON_CLICKED, CalculatorGUI::onButtonClick)
