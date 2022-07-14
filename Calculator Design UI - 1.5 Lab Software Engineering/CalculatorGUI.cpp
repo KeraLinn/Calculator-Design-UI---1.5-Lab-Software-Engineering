@@ -45,7 +45,11 @@ CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculato
 	wxButton* ButtonClear = factory.CreateButtonClear(this);
 #pragma endregion
 
-	
+	CalculatorProcessor* processor = CalculatorProcessor::GetInstance();
+	processor->SetBaseNumber(198);
+	std::cout << "Decimal: " << processor->GetDecimal() << std::endl;
+	std::cout << "Binary: " << processor->GetBinary() << std::endl;
+	std::cout << "Hexadecimal: " << processor->GetHexadecimal() << std::endl;
 }
 
 CalculatorGUI::~CalculatorGUI()
