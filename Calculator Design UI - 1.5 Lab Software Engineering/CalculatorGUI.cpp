@@ -18,7 +18,7 @@ CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculato
 	displayTextbox->SetFont(calculatorDisplayFont);
 
 #pragma region Button Factory
-	ButtonFactory factory;
+	ButtonFactory factory{};
 	wxButton* ButtonNeg = factory.CreateButtonNeg(this);
 	wxButton* Button0 = factory.CreateButton0(this);
 	wxButton* ButtonDot = factory.CreateButtonDot(this);
@@ -46,6 +46,7 @@ CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculato
 #pragma endregion
 
 	CalculatorProcessor* processor = CalculatorProcessor::GetInstance();
+
 	processor->SetBaseNumber(198);
 	std::cout << "Decimal: " << processor->GetDecimal() << std::endl;
 	std::cout << "Binary: " << processor->GetBinary() << std::endl;

@@ -141,7 +141,9 @@
     <ClInclude Include="ButtonFactory.h" />
     <ClInclude Include="CalculatorAppLaunch.h" />
     <ClInclude Include="CalculatorGUI.h" />
-    <ClInclude Include="CalculatorProcessor.h" />
+    <ClInclude Include="CalculatorProcessor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ButtonFactory.cpp" />
