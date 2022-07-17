@@ -141,11 +141,15 @@
     <ClInclude Include="ButtonFactory.h" />
     <ClInclude Include="CalculatorAppLaunch.h" />
     <ClInclude Include="CalculatorGUI.h" />
+    <ClInclude Include="CalculatorProcessor.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ButtonFactory.cpp" />
     <ClCompile Include="CalculatorAppLaunch.cpp" />
     <ClCompile Include="CalculatorGUI.cpp" />
+    <ClCompile Include="CalculatorProcessor.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

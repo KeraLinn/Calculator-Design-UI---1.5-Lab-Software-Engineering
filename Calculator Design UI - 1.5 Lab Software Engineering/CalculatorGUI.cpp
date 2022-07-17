@@ -1,23 +1,28 @@
 #include "CalculatorGUI.h"
 #include "ButtonFactory.h"
+#include "CalculatorProcessor.h"
+
 
 wxBEGIN_EVENT_TABLE(CalculatorGUI, wxFrame)
-EVT_COMMAND_RANGE(100,123,wxEVT_COMMAND_BUTTON_CLICKED, CalculatorGUI::onButtonClick)
+EVT_COMMAND_RANGE(100, 123, wxEVT_COMMAND_BUTTON_CLICKED, CalculatorGUI::onButtonClick)
+EVT_TEXT(5000, CalculatorGUI::onButtonClick)
 
 wxEND_EVENT_TABLE()
 
 CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculator", wxPoint(400, 150), wxSize(500, 845)) {
+
+
 
 ////Code for Cosmetics////
 	//Ideally space is for colors/color dialogs, pencolors/fonts etc.
 	wxFont calculatorDisplayFont(72, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD,false);
 ////End Code for Cosmetics////
 	
-	displayTextbox = new wxTextCtrl(this, 5000, " ", wxPoint(0, 0), wxSize(500, 200));
+	displayTextbox = new wxTextCtrl(this, 5000, " ", wxPoint(0, 0), wxSize(500, 200), wxTE_RIGHT);
 	displayTextbox->SetFont(calculatorDisplayFont);
-
+	
 #pragma region Button Factory
-	ButtonFactory factory;
+	ButtonFactory factory{};
 	wxButton* ButtonNeg = factory.CreateButtonNeg(this);
 	wxButton* Button0 = factory.CreateButton0(this);
 	wxButton* ButtonDot = factory.CreateButtonDot(this);
@@ -45,19 +50,30 @@ CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculato
 #pragma endregion
 
 	
+	
+	CalculatorProcessor* processor = CalculatorProcessor::GetInstance();
+
+	processor->SetBaseNumber(198);
+	std::cout << "Decimal: " << processor->GetDecimal() << std::endl;
+	std::cout << "Binary: " << processor->GetBinary() << std::endl;
+	std::cout << "Hexadecimal: " << processor->GetHexadecimal() << std::endl;
 }
 
 CalculatorGUI::~CalculatorGUI()
 {
-	
 }
+
+
+
 
 void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 	int theID = evt.GetId();
+	wxString theString = evt.GetString();
 
 	wxString buttonLabels2[] = {"+/-", "0",".","=","1","2","3","+","4","5","6","-","7","8","9","*","x^2","|x|","mod (%)","/","Hex","Dec","Bin","C"};
 	switch (theID) {
-	case 100: {displayTextbox->AppendText(buttonLabels2[0]); break; }
+	case 100: {;
+		displayTextbox->AppendText(buttonLabels2[0]); break; }
 	case 101: {displayTextbox->AppendText(buttonLabels2[1]); break; }
 	case 102: {displayTextbox->AppendText(buttonLabels2[2]); break; }
 	case 103: {displayTextbox->AppendText(buttonLabels2[3]); break; }

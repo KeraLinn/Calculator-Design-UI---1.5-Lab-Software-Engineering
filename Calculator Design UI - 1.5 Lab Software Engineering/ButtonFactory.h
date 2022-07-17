@@ -8,7 +8,7 @@ private:
 	wxWindowBase* _parentWindow;
 
 public:
-	
+	//void Bind(wxCommandEvent& evt);
 	wxButton* CreateButtonNeg(CalculatorGUI* parentWindow); 
 	wxButton* CreateButton0(CalculatorGUI* parentWindow);
 	wxButton* CreateButtonDot(CalculatorGUI* parentWindow);
