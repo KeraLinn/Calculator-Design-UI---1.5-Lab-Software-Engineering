@@ -1,4 +1,5 @@
 #pragma once
+#pragma warning(disable : 4996)
 #include <string>
 
 //implement this class as a singleton design pattern per the Day 6 lecture
@@ -11,6 +12,7 @@ private:
 	
 
 public:
+	
 	static CalculatorProcessor* GetInstance() {
 		if (_processor == nullptr) {
 			_processor = new CalculatorProcessor();
@@ -20,6 +22,10 @@ public:
 	void SetBaseNumber(int number) {
 		baseNumber = number;
 	}
+	int operandAdd(int a, int b);
+	int operandSubtract(int a, int b);
+	int operandMult(int a, int b);
+	int operandDivide(int a, int b);
 
 	CalculatorProcessor(CalculatorProcessor& copy) = delete;
 	void operator=(const CalculatorProcessor& assign) = delete;
@@ -70,9 +76,9 @@ public:
 			}
 			number = number / 2;
 		}
-
-
 		return binaryResults;
 	}
+
+
 };
 

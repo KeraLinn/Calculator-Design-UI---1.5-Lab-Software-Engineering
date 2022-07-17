@@ -4,6 +4,8 @@ wxFont calculatorButtonFont(45, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONT
 
 
 
+
+
 wxButton* ButtonFactory::CreateButtonNeg(CalculatorGUI* parentWindow)
 {
 	wxButton* ButtonNeg = new wxButton(parentWindow, 100, "+/-", wxPoint(0, 700), wxSize(125, 100));
@@ -170,5 +172,3 @@ wxButton* ButtonFactory::CreateButtonClear(CalculatorGUI* parentWindow)
 	ButtonClear->SetFont(calculatorButtonFont);
 	return nullptr;
 }
-
-
