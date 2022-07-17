@@ -2,8 +2,10 @@
 #include "ButtonFactory.h"
 #include "CalculatorProcessor.h"
 
+
 wxBEGIN_EVENT_TABLE(CalculatorGUI, wxFrame)
 EVT_COMMAND_RANGE(100, 123, wxEVT_COMMAND_BUTTON_CLICKED, CalculatorGUI::onButtonClick)
+EVT_TEXT(5000, CalculatorGUI::onButtonClick)
 
 wxEND_EVENT_TABLE()
 
@@ -16,7 +18,7 @@ CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculato
 	wxFont calculatorDisplayFont(72, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD,false);
 ////End Code for Cosmetics////
 	
-	displayTextbox = new wxTextCtrl(this, 5000, " ", wxPoint(0, 0), wxSize(500, 200));
+	displayTextbox = new wxTextCtrl(this, 5000, " ", wxPoint(0, 0), wxSize(500, 200), wxTE_RIGHT);
 	displayTextbox->SetFont(calculatorDisplayFont);
 	
 #pragma region Button Factory
@@ -47,6 +49,8 @@ CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculato
 	wxButton* ButtonClear = factory.CreateButtonClear(this);
 #pragma endregion
 
+	
+	
 	CalculatorProcessor* processor = CalculatorProcessor::GetInstance();
 
 	processor->SetBaseNumber(198);
@@ -64,10 +68,12 @@ CalculatorGUI::~CalculatorGUI()
 
 void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 	int theID = evt.GetId();
+	wxString theString = evt.GetString();
 
 	wxString buttonLabels2[] = {"+/-", "0",".","=","1","2","3","+","4","5","6","-","7","8","9","*","x^2","|x|","mod (%)","/","Hex","Dec","Bin","C"};
 	switch (theID) {
-	//case 100: {displayTextbox->AppendText(buttonLabels2[0]); break; }
+	case 100: {;
+		displayTextbox->AppendText(buttonLabels2[0]); break; }
 	case 101: {displayTextbox->AppendText(buttonLabels2[1]); break; }
 	case 102: {displayTextbox->AppendText(buttonLabels2[2]); break; }
 	case 103: {displayTextbox->AppendText(buttonLabels2[3]); break; }

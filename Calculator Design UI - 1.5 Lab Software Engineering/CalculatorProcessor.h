@@ -9,7 +9,6 @@ private:
 	CalculatorProcessor() {}
 	static CalculatorProcessor* _processor;
 	int baseNumber = 0;
-	
 
 public:
 	
@@ -26,6 +25,8 @@ public:
 	int operandSubtract(int a, int b);
 	int operandMult(int a, int b);
 	int operandDivide(int a, int b);
+	int operandAbsVal(int a);
+	int operandSquareVal(int a);
 
 	CalculatorProcessor(CalculatorProcessor& copy) = delete;
 	void operator=(const CalculatorProcessor& assign) = delete;
