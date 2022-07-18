@@ -1,5 +1,6 @@
 #pragma once
 #include "wx/wx.h"
+#include <iostream>
 
 class CalculatorGUI : public wxFrame
 {
@@ -15,10 +16,11 @@ public:
 	int xWidth = 4;
 	int yHeight = 6;
 	wxTextCtrl* displayTextbox = nullptr;
-	
+	wxStreamToTextRedirector* outputText = nullptr;
 
 	void onButtonClick(wxCommandEvent& evt);
 	
+
 	wxDECLARE_EVENT_TABLE();
 };
 
