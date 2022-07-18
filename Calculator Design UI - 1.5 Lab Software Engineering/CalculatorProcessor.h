@@ -1,6 +1,7 @@
 #pragma once
-#pragma warning(disable : 4996)
 #include <string>
+#include "IBaseCommand.h"
+
 
 //implement this class as a singleton design pattern per the Day 6 lecture
 class CalculatorProcessor

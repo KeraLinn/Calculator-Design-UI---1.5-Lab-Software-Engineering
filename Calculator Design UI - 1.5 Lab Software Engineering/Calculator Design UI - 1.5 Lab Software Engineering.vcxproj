@@ -144,12 +144,14 @@
     <ClInclude Include="CalculatorProcessor.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="IBaseCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ButtonFactory.cpp" />
     <ClCompile Include="CalculatorAppLaunch.cpp" />
     <ClCompile Include="CalculatorGUI.cpp" />
     <ClCompile Include="CalculatorProcessor.cpp" />
+    <ClCompile Include="IBaseCommand.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

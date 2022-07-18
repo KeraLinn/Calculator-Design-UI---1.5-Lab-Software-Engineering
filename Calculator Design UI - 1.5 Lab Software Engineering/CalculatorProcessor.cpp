@@ -1,7 +1,11 @@
 #include "CalculatorProcessor.h"
 #include "ButtonFactory.h"
+#include "IBaseCommand.h"
+#include <vector>
 
 CalculatorProcessor* CalculatorProcessor::_processor = nullptr;
+
+std::vector<IBaseCommand*> commands;
 
 int operandAdd(int a, int b) {
 	int resultsAdd = a + b;
@@ -27,3 +31,4 @@ int operandSquareVal(int a) {
 	int resultsSquareVal = a * a;
 	return resultsSquareVal;
 }
+
