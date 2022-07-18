@@ -5,7 +5,7 @@
 
 wxBEGIN_EVENT_TABLE(CalculatorGUI, wxFrame)
 EVT_COMMAND_RANGE(100, 123, wxEVT_COMMAND_BUTTON_CLICKED, CalculatorGUI::onButtonClick)
-EVT_TEXT(5000, CalculatorGUI::onButtonClick)
+
 
 wxEND_EVENT_TABLE()
 
@@ -57,6 +57,23 @@ CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculato
 	std::cout << "Decimal: " << processor->GetDecimal() << std::endl;
 	std::cout << "Binary: " << processor->GetBinary() << std::endl;
 	std::cout << "Hexadecimal: " << processor->GetHexadecimal() << std::endl;
+
+#pragma region ICommand
+	std::vector<IBaseCommand*> commands;
+	IBaseCommand* AddCommand;
+	IBaseCommand* SubtractCommand;
+	IBaseCommand* MultCommand;
+	IBaseCommand* DivideCommand;
+	IBaseCommand* AbsValCommand;
+	IBaseCommand* SquareValCommand;
+	commands.push_back(AddCommand);
+	commands.push_back(SubtractCommand);
+	commands.push_back(MultCommand);
+	commands.push_back(DivideCommand);
+	commands.push_back(AbsValCommand);
+	commands.push_back(SquareValCommand);
+#pragma endregion
+
 }
 
 CalculatorGUI::~CalculatorGUI()
@@ -68,8 +85,13 @@ CalculatorGUI::~CalculatorGUI()
 
 void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 	int theID = evt.GetId();
-	wxString theString = evt.GetString();
-
+	
+	//ButtonFactory factory{};
+	//factory.allButtons[theID]->GetLabel();
+	//wxButton* theButton = factory.allButtonsMap[theID];
+	//displayTextbox->AppendText();
+	//displayTextbox->AppendText(factory.allButtonsMap[theID].data());
+	
 	wxString buttonLabels2[] = {"+/-", "0",".","=","1","2","3","+","4","5","6","-","7","8","9","*","x^2","|x|","mod (%)","/","Hex","Dec","Bin","C"};
 	switch (theID) {
 	case 100: {;
@@ -98,7 +120,7 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 	case 122: {displayTextbox->AppendText(buttonLabels2[22]); break; }
 	case 123: {displayTextbox->Clear(); break; }
 	}
-
+	evt.GetSkipped();
 }
 
 

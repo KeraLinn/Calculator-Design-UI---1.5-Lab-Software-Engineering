@@ -1,13 +1,13 @@
 #pragma once
 #include <string>
 #include "IBaseCommand.h"
-
+#pragma warning(disable : 4996)
 
 //implement this class as a singleton design pattern per the Day 6 lecture
-class CalculatorProcessor
+class CalculatorProcessor 
 {
 private:
-	CalculatorProcessor() {}
+	CalculatorProcessor() {};
 	static CalculatorProcessor* _processor;
 	int baseNumber = 0;
 
@@ -22,13 +22,14 @@ public:
 	void SetBaseNumber(int number) {
 		baseNumber = number;
 	}
-	int operandAdd(int a, int b);
-	int operandSubtract(int a, int b);
-	int operandMult(int a, int b);
-	int operandDivide(int a, int b);
-	int operandAbsVal(int a);
-	int operandSquareVal(int a);
+	int operandAdd();
+	int operandSubtract();
+	int operandMult();
+	int operandDivide();
+	int operandAbsVal();
+	int operandSquareVal();
 
+	
 	CalculatorProcessor(CalculatorProcessor& copy) = delete;
 	void operator=(const CalculatorProcessor& assign) = delete;
 

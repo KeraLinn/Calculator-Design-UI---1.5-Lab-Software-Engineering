@@ -10,7 +10,7 @@ wxButton* ButtonFactory::CreateButtonNeg(CalculatorGUI* parentWindow)
 {
 	wxButton* ButtonNeg = new wxButton(parentWindow, 100, "+/-", wxPoint(0, 700), wxSize(125, 100));
 	ButtonNeg->SetFont(calculatorButtonFont);
-	ButtonNeg->SetLabel("+/-");
+	//allButtonsMap.insert(std::pair<int,std::string>(ButtonNeg->GetId(),ButtonNeg->GetLabel()));
 	return ButtonNeg;
 }
 
@@ -165,6 +165,7 @@ wxButton* ButtonFactory::CreateButtonBin(CalculatorGUI* parentWindow)
 {
 	wxButton* ButtonBin = new wxButton(parentWindow, 122, "Bin", wxPoint(250, 200), wxSize(125, 100));
 	ButtonBin->SetFont(calculatorButtonFont);
+	allButtons.push_back(ButtonBin);
 	return nullptr;
 }
 
