@@ -1,10 +1,11 @@
 #include "CalculatorProcessor.h"
 #include "ButtonFactory.h"
-#include "IBaseCommand.h"
+
 
 
 	CalculatorProcessor* CalculatorProcessor::_processor = nullptr;
-	int a, b;
+	int a = CalculatorGUI::firstInput;
+	int b = CalculatorGUI::secondInput;
 
 	int operandAdd() {
 		int resultsAdd = a + b;

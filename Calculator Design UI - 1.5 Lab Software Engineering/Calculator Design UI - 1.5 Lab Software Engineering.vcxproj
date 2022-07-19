@@ -145,6 +145,7 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="IBaseCommand.h" />
+    <ClInclude Include="Operands.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ButtonFactory.cpp" />
@@ -152,6 +153,7 @@
     <ClCompile Include="CalculatorGUI.cpp" />
     <ClCompile Include="CalculatorProcessor.cpp" />
     <ClCompile Include="IBaseCommand.cpp" />
+    <ClCompile Include="Operands.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

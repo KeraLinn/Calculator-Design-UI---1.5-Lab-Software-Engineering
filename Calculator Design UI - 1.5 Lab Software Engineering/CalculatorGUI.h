@@ -18,7 +18,10 @@ public:
 
 	int ValueFromTxtCtrlToInt();
 	wxString IntToWXString(int x);
-
+	void ClickEquals(int a, int b);
+	static int firstInput;
+	static int secondInput;
+	
 	void onButtonClick(wxCommandEvent& evt);
 	
 

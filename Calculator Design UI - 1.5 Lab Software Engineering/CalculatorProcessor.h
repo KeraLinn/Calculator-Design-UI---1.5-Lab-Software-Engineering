@@ -22,14 +22,14 @@ public:
 	void SetBaseNumber(int number) {
 		baseNumber = number;
 	}
-	int operandAdd();
+	static int operandAdd();
 	int operandSubtract();
 	int operandMult();
 	int operandDivide();
 	int operandAbsVal();
 	int operandSquareVal();
 
-	
+
 	CalculatorProcessor(CalculatorProcessor& copy) = delete;
 	void operator=(const CalculatorProcessor& assign) = delete;
 
