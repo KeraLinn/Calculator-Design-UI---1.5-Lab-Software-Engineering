@@ -3,7 +3,7 @@
 #include "IBaseCommand.h"
 
 
-	CalculatorProcessor* _processor = nullptr;
+	CalculatorProcessor* CalculatorProcessor::_processor = nullptr;
 	int a, b;
 
 	int operandAdd() {

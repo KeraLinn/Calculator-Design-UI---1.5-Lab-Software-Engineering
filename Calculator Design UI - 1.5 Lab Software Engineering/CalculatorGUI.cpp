@@ -83,20 +83,33 @@ CalculatorGUI::~CalculatorGUI()
 
 
 
+int CalculatorGUI::ValueFromTxtCtrlToInt()
+{
+	wxString str = displayTextbox->GetValue();
+	int theNum = wxAtoi(str);
+	return theNum;
+}
+
+wxString CalculatorGUI::IntToWXString(int x)
+{
+	wxString theString; 
+	theString << x;
+	return theString;
+}
+
 void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 	int theID = evt.GetId();
 	
-	//ButtonFactory factory{};
-	//factory.allButtons[theID]->GetLabel();
-	//wxButton* theButton = factory.allButtonsMap[theID];
-	//displayTextbox->AppendText();
-	//displayTextbox->AppendText(factory.allButtonsMap[theID].data());
-	
+	//100 = neg, 102 = dot, 103 = =,107 = +, 111 = -, 115 = *, 116 = ^2, 117 = |x|, 118 = %, 119 = /, 120 = hex, 121 = dec, 122 = bin, 123 = C
 	wxString buttonLabels2[] = {"+/-", "0",".","=","1","2","3","+","4","5","6","-","7","8","9","*","x^2","|x|","mod (%)","/","Hex","Dec","Bin","C"};
 	switch (theID) {
-	case 100: {;
-		displayTextbox->AppendText(buttonLabels2[0]); break; }
-	case 101: {displayTextbox->AppendText(buttonLabels2[1]); break; }
+	case 100: {
+		int theNegative = ValueFromTxtCtrlToInt();
+		displayTextbox->Clear();
+		theNegative = theNegative * -1;
+		
+		displayTextbox->AppendText(IntToWXString(theNegative)); break; }
+	case 101: {displayTextbox->AppendText(Button0->GetLabelText()); break; }
 	case 102: {displayTextbox->AppendText(buttonLabels2[2]); break; }
 	case 103: {displayTextbox->AppendText(buttonLabels2[3]); break; }
 	case 104: {displayTextbox->AppendText(buttonLabels2[4]); break; }

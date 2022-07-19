@@ -16,6 +16,9 @@ public:
 	int yHeight = 6;
 	wxTextCtrl* displayTextbox = nullptr;
 
+	int ValueFromTxtCtrlToInt();
+	wxString IntToWXString(int x);
+
 	void onButtonClick(wxCommandEvent& evt);
 	
 

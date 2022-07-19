@@ -15,7 +15,7 @@ wxButton* ButtonFactory::CreateButtonNeg(CalculatorGUI* parentWindow)
 }
 
 wxButton* ButtonFactory::CreateButton0(CalculatorGUI* parentWindow) {
-	wxButton* Button0 = new wxButton(parentWindow,101,wxT("0"), wxPoint(125,700),wxSize(125,100));
+	wxButton* Button0 = new wxButton(parentWindow,101,"0", wxPoint(125,700),wxSize(125,100));
 	Button0->SetFont(calculatorButtonFont);
 	Button0->SetLabel("0");
 	return Button0;
