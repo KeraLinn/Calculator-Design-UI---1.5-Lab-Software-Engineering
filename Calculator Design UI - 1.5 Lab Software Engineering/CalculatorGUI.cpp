@@ -57,24 +57,24 @@ CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculato
 	wxButton* ButtonClear = factory.CreateButtonClear(this);
 #pragma endregion
 
-#pragma region ProcessorSetup
+
 	CalculatorProcessor* processor = CalculatorProcessor::GetInstance();
 
 	processor->SetBaseNumber(198);
 	std::cout << "Decimal: " << processor->GetDecimal() << std::endl;
 	std::cout << "Binary: " << processor->GetBinary() << std::endl;
 	std::cout << "Hexadecimal: " << processor->GetHexadecimal() << std::endl;
-#pragma endregion
 
 #pragma region ICommand
 	std::vector<IBaseCommand*> commands;
+	CalculatorProcessor* proAdd;
+	
 	IBaseCommand* AddCommand;
 	IBaseCommand* SubtractCommand;
 	IBaseCommand* MultCommand;
 	IBaseCommand* DivideCommand;
 	IBaseCommand* AbsValCommand;
 	IBaseCommand* SquareValCommand;
-	CalculatorProcessor* proAdd = CalculatorProcessor::GetInstance();
 	commands.push_back(AddCommand);
 	commands.push_back(SubtractCommand);
 	commands.push_back(MultCommand);
@@ -90,11 +90,9 @@ CalculatorGUI::~CalculatorGUI()
 }
 
 
-
-
-int CalculatorGUI::ValueFromTxtCtrlToInt()
+int CalculatorGUI::ValueFromTxtCtrlToInt(wxTextCtrl* display)
 {
-	wxString str = displayTextbox->GetValue();
+	wxString str = display->GetValue();
 	int theNum = wxAtoi(str);
 	return theNum;
 }
@@ -106,12 +104,13 @@ wxString CalculatorGUI::IntToWXString(int x)
 	return theString;
 }
 
-void CalculatorGUI::ClickEquals(wxCommandEvent& evtEqualClick)
-{//will need to clear displayTextbox and displayOperand together
-	
+void CalculatorGUI::ClickEquals(int firstInput, int secondInput, int theChosenOperand)
+{
+
+	operands(theChosenOperand);
 #pragma region ICommand
 	std::vector<IBaseCommand*> commands;
-	/*IBaseCommand* AddCommand = (Operands*)ops->operandAdd(a, b);
+	IBaseCommand* AddCommand = ;
 	IBaseCommand* SubtractCommand = (Operands*)ops->operandSubtract(a, b);
 	IBaseCommand* MultCommand = (Operands*)ops->operandMult(a, b);
 	IBaseCommand* DivideCommand = (Operands*)ops->operandDivide(a, b);
@@ -122,22 +121,26 @@ void CalculatorGUI::ClickEquals(wxCommandEvent& evtEqualClick)
 	commands.push_back(MultCommand);
 	commands.push_back(DivideCommand);
 	commands.push_back(AbsValCommand);
-	commands.push_back(SquareValCommand);*/
+	commands.push_back(SquareValCommand);
 #pragma endregion
-	
+	for (int i = 0; i < commands.size(); i++) {
+		commands[theChosenOperand]->Execute();
+		commands.pop_back();
+	}
+	displayPrevInput->Clear();
+	displayOperand->Clear();
+
 }
 
 void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 
 	int theID = evt.GetId();
-	int inputRound = 1;
-	int firstInput = NULL;
-	int secondInput = NULL;
+	int firstInput, secondInput, theChosenOperand;
 	//100 = neg, 102 = dot, 103 = =,107 = +, 111 = -, 115 = *, 116 = ^2, 117 = |x|, 118 = %, 119 = /, 120 = hex, 121 = dec, 122 = bin, 123 = C
 	wxString buttonLabels2[] = {"+/-", "0",".","=","1","2","3","+","4","5","6","-","7","8","9","*","x^2","|x|","mod (%)","/","Hex","Dec","Bin","C"};
 	switch (theID) {
 	case 100: { //negative
-		int theNegative = ValueFromTxtCtrlToInt();
+		int theNegative = ValueFromTxtCtrlToInt(displayTextbox);
 		displayTextbox->Clear();
 		theNegative = theNegative * -1;
 
@@ -145,19 +148,21 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 	case 101: {displayTextbox->AppendText(buttonLabels2[1]); break; }
 	case 102: {//dot
 		displayTextbox->AppendText(buttonLabels2[2]); break; }
-	case 103: {
-		//ClickEquals();
+	case 103: { //equals
+		secondInput = ValueFromTxtCtrlToInt(displayTextbox);
+		theChosenOperand = ValueFromTxtCtrlToInt(displayOperand);
+		ClickEquals(firstInput, secondInput,theChosenOperand);
 		break; }
+#pragma region Buttons 1,2,3
 	case 104: {displayTextbox->AppendText(buttonLabels2[4]); break; }
 	case 105: {displayTextbox->AppendText(buttonLabels2[5]); break; }
 	case 106: {displayTextbox->AppendText(buttonLabels2[6]); break; }
+#pragma endregion
 	case 107: { //plus
-		firstInput = ValueFromTxtCtrlToInt();
-		/*if (firstInput != NULL) {
-			firstInput = ValueFromTxtCtrlToInt();
-		}*/
+		firstInput = ValueFromTxtCtrlToInt(displayTextbox);
+		displayPrevInput->AppendText(IntToWXString(firstInput));
 		displayOperand->AppendText(buttonLabels2[7]);
-		//displayTextbox->Clear();
+		displayTextbox->Clear();
 		/* was trying to do fancy by storing first input, then second input, and if you're doing a third or more number, combine those 2 inputs first and then accept the next input. It didn't work here - I think I may need to have another method separate from the click equals that's specifically for getting 2 inputs & storing them?
 		if (inputRound == 1) {
 			firstInput = ValueFromTxtCtrlToInt();
@@ -177,16 +182,19 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 			inputRound = 3;
 			break;
 		}*/
-		break;
-	}
+		break; }
+#pragma region Buttons 4,5,6
 	case 108: {displayTextbox->AppendText(buttonLabels2[8]); break; }
 	case 109: {displayTextbox->AppendText(buttonLabels2[9]); break; }
 	case 110: {displayTextbox->AppendText(buttonLabels2[10]); break; }
+#pragma endregion
 	case 111: { //minus
 		displayTextbox->AppendText(buttonLabels2[11]); break; }
+#pragma region Buttons 7,8,9
 	case 112: {displayTextbox->AppendText(buttonLabels2[12]); break; }
 	case 113: {displayTextbox->AppendText(buttonLabels2[13]); break; }
 	case 114: {displayTextbox->AppendText(buttonLabels2[14]); break; }
+#pragma endregion
 	case 115: { //mult
 		displayTextbox->AppendText(buttonLabels2[15]); break; }
 	case 116: { //squared

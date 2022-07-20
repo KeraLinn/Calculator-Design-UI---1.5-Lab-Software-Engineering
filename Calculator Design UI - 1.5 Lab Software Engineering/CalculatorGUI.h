@@ -17,16 +17,18 @@ public:
 	wxTextCtrl* displayTextbox = nullptr;
 	wxTextCtrl* displayOperand = nullptr;
 	wxTextCtrl* displayPrevInput = nullptr;
-	int firstInput = 0;
-	int secondInput = 0;
 
-	int ValueFromTxtCtrlToInt();
+
+	int ValueFromTxtCtrlToInt(wxTextCtrl* display);
 	wxString IntToWXString(int x);
-	void ClickEquals(wxCommandEvent& evtEqualClick);
+	void ClickEquals(int firstInput, int secondInput,int theChosenOperand);
 	
 	void onButtonClick(wxCommandEvent& evt);
 	
-
+	enum operands
+	{
+		add = 1, subtract, mult, divide, mod, square, absVal
+	};
 	wxDECLARE_EVENT_TABLE();
 };
 

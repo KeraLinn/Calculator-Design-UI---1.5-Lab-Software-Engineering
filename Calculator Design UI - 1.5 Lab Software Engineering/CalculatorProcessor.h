@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
-#include "IBaseCommand.h"
-#pragma warning(disable : 4996)
+#include <vector>
+
 
 //implement this class as a singleton design pattern per the Day 6 lecture
 class CalculatorProcessor 
@@ -22,14 +22,7 @@ public:
 	void SetBaseNumber(int number) {
 		baseNumber = number;
 	}
-	static int operandAdd();
-	int operandSubtract();
-	int operandMult();
-	int operandDivide();
-	int operandAbsVal();
-	int operandSquareVal();
-
-
+	
 	CalculatorProcessor(CalculatorProcessor& copy) = delete;
 	void operator=(const CalculatorProcessor& assign) = delete;
 

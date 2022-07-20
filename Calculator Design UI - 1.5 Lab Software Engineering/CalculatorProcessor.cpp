@@ -1,46 +1,33 @@
 #include "CalculatorProcessor.h"
-#include "ButtonFactory.h"
-
+#include "OperandMult.h"
+#include "OperandAbsoluteValue.h"
+#include "OperandAdd.h"
+#include "OperandDivide.h"
+#include "OperandMod.h"
+#include "OperandSquared.h"
+#include "OperandSubtract.h"
+#include <vector>
+#include "IBaseCommand.h"
 
 
 	CalculatorProcessor* CalculatorProcessor::_processor = nullptr;
+int main()
+{
+		std::vector<IBaseCommand*> commandQueue;
 
-	int a = 0;
-	int b = 0;
+		OperandAdd AddCommand;
+		OperandSubtract SubtractCommand;
+		OperandDivide DivideCommand;
+		OperandMod ModCommand;
+		OperandMult MultCommand;
+		OperandSquared SquareCommand;
+		OperandAbsoluteValue AbsValCommand;
 
-	int operandAdd() {
-		int resultsAdd = a + b;
-		return resultsAdd;
-	}
-	int operandSubtract() {
-		int resultsSubtract = a - b;
-		return resultsSubtract;
-	}
-	int operandMult() {
-		int resultsMult = a * b;
-		return resultsMult;
-	}
-	int operandDivide() {
-		int resultsDivide = a / b;
-		return resultsDivide;
-	}
-	int operandAbsVal() {
-		int resultsAbsVal = abs(a);
-		return resultsAbsVal;
-	}
-	int operandSquareVal() {
-		int resultsSquareVal = a * a;
-		return resultsSquareVal;
-	}
-
-	void Execute() {
-		operandAdd();
-		operandSubtract();
-		operandMult();
-		operandDivide();
-		operandAbsVal();
-		operandSquareVal();
-	}
-
-	
-
+		commandQueue.push_back(&AddCommand);
+		commandQueue.push_back(&SubtractCommand);
+		commandQueue.push_back(&DivideCommand);
+		commandQueue.push_back(&ModCommand);
+		commandQueue.push_back(&MultCommand);
+		commandQueue.push_back(&SquareCommand);
+		commandQueue.push_back(&AbsValCommand);
+}

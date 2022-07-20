@@ -145,7 +145,14 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="IBaseCommand.h" />
-    <ClInclude Include="Operands.h" />
+    <ClInclude Include="OperandMult.h" />
+    <ClInclude Include="OperandAbsoluteValue.h" />
+    <ClInclude Include="OperandAdd.h" />
+    <ClInclude Include="OperandDivide.h" />
+    <ClInclude Include="OperandMod.h" />
+    <ClInclude Include="OperandSquared.h" />
+    <ClInclude Include="OperandSubtract.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ButtonFactory.cpp" />
@@ -154,6 +161,9 @@
     <ClCompile Include="CalculatorProcessor.cpp" />
     <ClCompile Include="IBaseCommand.cpp" />
     <ClCompile Include="Operands.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Calculator Design UI - 1.5 Lab Software Engineering.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
