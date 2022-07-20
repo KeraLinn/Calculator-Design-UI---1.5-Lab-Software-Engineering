@@ -13,15 +13,22 @@ wxEND_EVENT_TABLE()
 CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculator", wxPoint(400, 150), wxSize(500, 845)) {
 
 
-
-////Code for Cosmetics////
+#pragma region ////Code for Cosmetics////
 	//Ideally space is for colors/color dialogs, pencolors/fonts etc.
-	wxFont calculatorDisplayFont(72, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD,false);
-////End Code for Cosmetics////
-	
-	displayTextbox = new wxTextCtrl(this, 5000, " ", wxPoint(0, 0), wxSize(500, 200), wxTE_RIGHT);
+	wxFont calculatorDisplayFont(72, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
+	wxFont operandDisplayFont(20, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false);
+	wxFont prevInputDisplayFont(25, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false);
+#pragma endregion	
+
+	displayTextbox = new wxTextCtrl(this, 5000, " ", wxPoint(100, 0), wxSize(400, 200), wxTE_RIGHT);
 	displayTextbox->SetFont(calculatorDisplayFont);
 	
+	displayOperand = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(0, 0), wxSize(100, 100),wxTE_CENTER);
+	displayOperand->SetFont(operandDisplayFont);
+
+	displayPrevInput = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(0, 100), wxSize(100, 100), wxTE_CENTER);
+	displayPrevInput->SetFont(prevInputDisplayFont);
+
 #pragma region Button Factory
 	ButtonFactory factory{};
 	wxButton* ButtonNeg = factory.CreateButtonNeg(this);
@@ -99,8 +106,9 @@ wxString CalculatorGUI::IntToWXString(int x)
 	return theString;
 }
 
-void CalculatorGUI::ClickEquals(int a, int b)
-{
+void CalculatorGUI::ClickEquals(wxCommandEvent& evtEqualClick)
+{//will need to clear displayTextbox and displayOperand together
+	
 #pragma region ICommand
 	std::vector<IBaseCommand*> commands;
 	/*IBaseCommand* AddCommand = (Operands*)ops->operandAdd(a, b);
@@ -123,66 +131,82 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 
 	int theID = evt.GetId();
 	int inputRound = 1;
-	//int firstInput, secondInput;
+	int firstInput = NULL;
+	int secondInput = NULL;
 	//100 = neg, 102 = dot, 103 = =,107 = +, 111 = -, 115 = *, 116 = ^2, 117 = |x|, 118 = %, 119 = /, 120 = hex, 121 = dec, 122 = bin, 123 = C
 	wxString buttonLabels2[] = {"+/-", "0",".","=","1","2","3","+","4","5","6","-","7","8","9","*","x^2","|x|","mod (%)","/","Hex","Dec","Bin","C"};
 	switch (theID) {
-	case 100: {
+	case 100: { //negative
 		int theNegative = ValueFromTxtCtrlToInt();
 		displayTextbox->Clear();
 		theNegative = theNegative * -1;
-		
+
 		displayTextbox->AppendText(IntToWXString(theNegative)); break; }
 	case 101: {displayTextbox->AppendText(buttonLabels2[1]); break; }
-	case 102: {displayTextbox->AppendText(buttonLabels2[2]); break; }
+	case 102: {//dot
+		displayTextbox->AppendText(buttonLabels2[2]); break; }
 	case 103: {
-
-		displayTextbox->AppendText(buttonLabels2[3]); break; }
+		//ClickEquals();
+		break; }
 	case 104: {displayTextbox->AppendText(buttonLabels2[4]); break; }
 	case 105: {displayTextbox->AppendText(buttonLabels2[5]); break; }
 	case 106: {displayTextbox->AppendText(buttonLabels2[6]); break; }
 	case 107: { //plus
-		
+		firstInput = ValueFromTxtCtrlToInt();
+		/*if (firstInput != NULL) {
+			firstInput = ValueFromTxtCtrlToInt();
+		}*/
+		displayOperand->AppendText(buttonLabels2[7]);
+		//displayTextbox->Clear();
+		/* was trying to do fancy by storing first input, then second input, and if you're doing a third or more number, combine those 2 inputs first and then accept the next input. It didn't work here - I think I may need to have another method separate from the click equals that's specifically for getting 2 inputs & storing them?
 		if (inputRound == 1) {
 			firstInput = ValueFromTxtCtrlToInt();
-			displayTextbox->Clear();
-			inputRound += 1;
+			inputRound = inputRound + 1;
 			break;
 		}
 		if (inputRound == 2) {
-			secondInput = ValueFromTxtCtrlToInt();
 			displayTextbox->Clear();
-			inputRound += 1;
+			secondInput = ValueFromTxtCtrlToInt();
+			inputRound = inputRound + 1;
 			break;
 		}
 		if (inputRound > 2) {
 			firstInput = firstInput + secondInput;
 			displayTextbox->Clear();
 			secondInput = ValueFromTxtCtrlToInt();
-			inputRound = 2;
+			inputRound = 3;
 			break;
-		}
-		//displayTextbox->Clear();
-		//displayTextbox->AppendText(buttonLabels2[7]); break; 
-		}
+		}*/
+		break;
+	}
 	case 108: {displayTextbox->AppendText(buttonLabels2[8]); break; }
 	case 109: {displayTextbox->AppendText(buttonLabels2[9]); break; }
 	case 110: {displayTextbox->AppendText(buttonLabels2[10]); break; }
-	case 111: {displayTextbox->AppendText(buttonLabels2[11]); break; }
+	case 111: { //minus
+		displayTextbox->AppendText(buttonLabels2[11]); break; }
 	case 112: {displayTextbox->AppendText(buttonLabels2[12]); break; }
 	case 113: {displayTextbox->AppendText(buttonLabels2[13]); break; }
 	case 114: {displayTextbox->AppendText(buttonLabels2[14]); break; }
-	case 115: {displayTextbox->AppendText(buttonLabels2[15]); break; }
-	case 116: {displayTextbox->AppendText(buttonLabels2[16]); break; }
-	case 117: {displayTextbox->AppendText(buttonLabels2[17]); break; }
-	case 118: {displayTextbox->AppendText(buttonLabels2[18]); break; }
-	case 119: {displayTextbox->AppendText(buttonLabels2[19]); break; }
-	case 120: {displayTextbox->AppendText(buttonLabels2[20]); break; }
-	case 121: {displayTextbox->AppendText(buttonLabels2[21]); break; }
-	case 122: {displayTextbox->AppendText(buttonLabels2[22]); break; }
-	case 123: {displayTextbox->Clear(); break; }
+	case 115: { //mult
+		displayTextbox->AppendText(buttonLabels2[15]); break; }
+	case 116: { //squared
+		displayTextbox->AppendText(buttonLabels2[16]); break; }
+	case 117: { //absolute value
+		displayTextbox->AppendText(buttonLabels2[17]); break; }
+	case 118: {//mod
+		displayTextbox->AppendText(buttonLabels2[18]); break; }
+	case 119: {//divide
+		displayTextbox->AppendText(buttonLabels2[19]); break; }
+	case 120: {//hex
+		displayTextbox->AppendText(buttonLabels2[20]); break; }
+	case 121: {//dec
+		displayTextbox->AppendText(buttonLabels2[21]); break; }
+	case 122: {//bin
+		displayTextbox->AppendText(buttonLabels2[22]); break; }
+	case 123: { //clear
+		displayTextbox->Clear(); break; }
 	}
-	evt.GetSkipped();
+	//evt.GetSkipped();
 }
 
 

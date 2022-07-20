@@ -15,12 +15,14 @@ public:
 	int xWidth = 4;
 	int yHeight = 6;
 	wxTextCtrl* displayTextbox = nullptr;
+	wxTextCtrl* displayOperand = nullptr;
+	wxTextCtrl* displayPrevInput = nullptr;
+	int firstInput = 0;
+	int secondInput = 0;
 
 	int ValueFromTxtCtrlToInt();
 	wxString IntToWXString(int x);
-	void ClickEquals(int a, int b);
-	static int firstInput;
-	static int secondInput;
+	void ClickEquals(wxCommandEvent& evtEqualClick);
 	
 	void onButtonClick(wxCommandEvent& evt);
 	

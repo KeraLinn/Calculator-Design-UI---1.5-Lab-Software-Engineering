@@ -4,8 +4,9 @@
 
 
 	CalculatorProcessor* CalculatorProcessor::_processor = nullptr;
-	int a = CalculatorGUI::firstInput;
-	int b = CalculatorGUI::secondInput;
+
+	int a = 0;
+	int b = 0;
 
 	int operandAdd() {
 		int resultsAdd = a + b;
