@@ -64,25 +64,6 @@ CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculato
 	std::cout << "Decimal: " << processor->GetDecimal() << std::endl;
 	std::cout << "Binary: " << processor->GetBinary() << std::endl;
 	std::cout << "Hexadecimal: " << processor->GetHexadecimal() << std::endl;
-
-#pragma region ICommand
-	std::vector<IBaseCommand*> commands;
-	CalculatorProcessor* proAdd;
-	
-	IBaseCommand* AddCommand;
-	IBaseCommand* SubtractCommand;
-	IBaseCommand* MultCommand;
-	IBaseCommand* DivideCommand;
-	IBaseCommand* AbsValCommand;
-	IBaseCommand* SquareValCommand;
-	commands.push_back(AddCommand);
-	commands.push_back(SubtractCommand);
-	commands.push_back(MultCommand);
-	commands.push_back(DivideCommand);
-	commands.push_back(AbsValCommand);
-	commands.push_back(SquareValCommand);
-#pragma endregion
-	
 }
 
 CalculatorGUI::~CalculatorGUI()
@@ -107,26 +88,7 @@ wxString CalculatorGUI::IntToWXString(int x)
 void CalculatorGUI::ClickEquals(int firstInput, int secondInput, int theChosenOperand)
 {
 
-	operands(theChosenOperand);
-#pragma region ICommand
-	std::vector<IBaseCommand*> commands;
-	IBaseCommand* AddCommand = ;
-	IBaseCommand* SubtractCommand = (Operands*)ops->operandSubtract(a, b);
-	IBaseCommand* MultCommand = (Operands*)ops->operandMult(a, b);
-	IBaseCommand* DivideCommand = (Operands*)ops->operandDivide(a, b);
-	IBaseCommand* AbsValCommand = (Operands*)ops->operandAbsVal(a);
-	IBaseCommand* SquareValCommand = (Operands*)ops->operandSquareVal(a);
-	commands.push_back(AddCommand);
-	commands.push_back(SubtractCommand);
-	commands.push_back(MultCommand);
-	commands.push_back(DivideCommand);
-	commands.push_back(AbsValCommand);
-	commands.push_back(SquareValCommand);
-#pragma endregion
-	for (int i = 0; i < commands.size(); i++) {
-		commands[theChosenOperand]->Execute();
-		commands.pop_back();
-	}
+	
 	displayPrevInput->Clear();
 	displayOperand->Clear();
 
