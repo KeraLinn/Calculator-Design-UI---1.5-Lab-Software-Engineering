@@ -1,5 +1,6 @@
 #pragma once
 #include "IBaseCommand.h"
+#include "CalculatorGUI.h"
 
 class OperandMod : public IBaseCommand {
 public:

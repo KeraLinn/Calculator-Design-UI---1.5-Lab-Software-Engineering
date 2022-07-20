@@ -8,6 +8,7 @@ public:
 
 	int operandAdd() {
 		int resultsAdd = a + b;
+		didExecute = true;
 		return resultsAdd;
 	}
 	void Execute() {

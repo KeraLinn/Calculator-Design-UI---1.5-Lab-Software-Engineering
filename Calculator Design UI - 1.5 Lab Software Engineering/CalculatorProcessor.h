@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-
+#pragma warning(disable : 4996)
 
 //implement this class as a singleton design pattern per the Day 6 lecture
 class CalculatorProcessor 
@@ -75,6 +75,6 @@ public:
 		return binaryResults;
 	}
 
-
+	static int ClickEquals(int firstInput, int secondInput, int chosenOperand);
 };
 

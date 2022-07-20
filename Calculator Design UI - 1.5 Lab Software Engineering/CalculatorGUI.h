@@ -17,7 +17,9 @@ public:
 	wxTextCtrl* displayTextbox = nullptr;
 	wxTextCtrl* displayOperand = nullptr;
 	wxTextCtrl* displayPrevInput = nullptr;
-
+	int firstInput = 0;
+	int secondInput = 0;
+	int theResults;
 
 	int ValueFromTxtCtrlToInt(wxTextCtrl* display);
 	wxString IntToWXString(int x);

@@ -1,7 +1,7 @@
 #include "CalculatorGUI.h"
 #include "ButtonFactory.h"
 #include "CalculatorProcessor.h"
-#include "Operands.h"
+#include "IBaseCommand.h"
 
 
 wxBEGIN_EVENT_TABLE(CalculatorGUI, wxFrame)
@@ -85,10 +85,13 @@ wxString CalculatorGUI::IntToWXString(int x)
 	return theString;
 }
 
-void CalculatorGUI::ClickEquals(int firstInput, int secondInput, int theChosenOperand)
+void CalculatorGUI::ClickEquals(int firstInput, int secondInput, int chosenOperand)
 {
-
 	
+	CalculatorProcessor::ClickEquals(firstInput, secondInput, chosenOperand);
+	IBaseCommand* myResults = nullptr;
+	myResults->theFinalResult;
+	displayTextbox->AppendText(IntToWXString((int)myResults));
 	displayPrevInput->Clear();
 	displayOperand->Clear();
 
@@ -97,7 +100,9 @@ void CalculatorGUI::ClickEquals(int firstInput, int secondInput, int theChosenOp
 void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 
 	int theID = evt.GetId();
-	int firstInput, secondInput, theChosenOperand;
+	int firstInput = 0;
+	int secondInput = 0;
+	int chosenOperand;
 	//100 = neg, 102 = dot, 103 = =,107 = +, 111 = -, 115 = *, 116 = ^2, 117 = |x|, 118 = %, 119 = /, 120 = hex, 121 = dec, 122 = bin, 123 = C
 	wxString buttonLabels2[] = {"+/-", "0",".","=","1","2","3","+","4","5","6","-","7","8","9","*","x^2","|x|","mod (%)","/","Hex","Dec","Bin","C"};
 	switch (theID) {
@@ -112,8 +117,8 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 		displayTextbox->AppendText(buttonLabels2[2]); break; }
 	case 103: { //equals
 		secondInput = ValueFromTxtCtrlToInt(displayTextbox);
-		theChosenOperand = ValueFromTxtCtrlToInt(displayOperand);
-		ClickEquals(firstInput, secondInput,theChosenOperand);
+		chosenOperand = ValueFromTxtCtrlToInt(displayOperand);
+		ClickEquals(firstInput, secondInput, chosenOperand);
 		break; }
 #pragma region Buttons 1,2,3
 	case 104: {displayTextbox->AppendText(buttonLabels2[4]); break; }
@@ -123,27 +128,9 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 	case 107: { //plus
 		firstInput = ValueFromTxtCtrlToInt(displayTextbox);
 		displayPrevInput->AppendText(IntToWXString(firstInput));
+		chosenOperand = 107;
 		displayOperand->AppendText(buttonLabels2[7]);
 		displayTextbox->Clear();
-		/* was trying to do fancy by storing first input, then second input, and if you're doing a third or more number, combine those 2 inputs first and then accept the next input. It didn't work here - I think I may need to have another method separate from the click equals that's specifically for getting 2 inputs & storing them?
-		if (inputRound == 1) {
-			firstInput = ValueFromTxtCtrlToInt();
-			inputRound = inputRound + 1;
-			break;
-		}
-		if (inputRound == 2) {
-			displayTextbox->Clear();
-			secondInput = ValueFromTxtCtrlToInt();
-			inputRound = inputRound + 1;
-			break;
-		}
-		if (inputRound > 2) {
-			firstInput = firstInput + secondInput;
-			displayTextbox->Clear();
-			secondInput = ValueFromTxtCtrlToInt();
-			inputRound = 3;
-			break;
-		}*/
 		break; }
 #pragma region Buttons 4,5,6
 	case 108: {displayTextbox->AppendText(buttonLabels2[8]); break; }
