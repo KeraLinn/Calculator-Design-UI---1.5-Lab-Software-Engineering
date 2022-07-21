@@ -3,113 +3,114 @@
 wxFont calculatorButtonFont(45, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_MEDIUM, false);
 
 
-
-
-
-wxButton* ButtonFactory::CreateButtonNeg(CalculatorGUI* parentWindow)
-{
-	wxButton* ButtonNeg = new wxButton(parentWindow, 100, "+/-", wxPoint(0, 700), wxSize(125, 100));
-	ButtonNeg->SetFont(calculatorButtonFont);
-	return ButtonNeg;
-}
-
+///////numeric buttons wxIDs 100-109
 wxButton* ButtonFactory::CreateButton0(CalculatorGUI* parentWindow) {
-	wxButton* Button0 = new wxButton(parentWindow,101,"0", wxPoint(125,700),wxSize(125,100));
+	wxButton* Button0 = new wxButton(parentWindow, 100, "0", wxPoint(125, 700), wxSize(125, 100));
 	Button0->SetFont(calculatorButtonFont);
-	Button0->SetLabel("0");
 	return Button0;
-}
-
-wxButton* ButtonFactory::CreateButtonDot(CalculatorGUI* parentWindow)
-{
-	wxButton* ButtonDot = new wxButton(parentWindow, 102, ".", wxPoint(250, 700), wxSize(125, 100));
-	ButtonDot->SetFont(calculatorButtonFont);
-	return nullptr;
-}
-
-wxButton* ButtonFactory::CreateButtonEquals(CalculatorGUI* parentWindow)
-{
-	wxButton* ButtonEquals = new wxButton(parentWindow, 103, "=", wxPoint(375, 700), wxSize(125, 100));
-	ButtonEquals->SetFont(calculatorButtonFont);
-	return nullptr;
 }
 
 wxButton* ButtonFactory::CreateButton1(CalculatorGUI* parentWindow)
 {
-	wxButton* Button1 = new wxButton(parentWindow, 104, "1", wxPoint(0, 600), wxSize(125, 100));
+	wxButton* Button1 = new wxButton(parentWindow, 101, "1", wxPoint(0, 600), wxSize(125, 100));
 	Button1->SetFont(calculatorButtonFont);
 	return nullptr;
 }
 
 wxButton* ButtonFactory::CreateButton2(CalculatorGUI* parentWindow)
 {
-	wxButton* Button2 = new wxButton(parentWindow, 105, "2", wxPoint(125, 600), wxSize(125, 100));
+	wxButton* Button2 = new wxButton(parentWindow, 102, "2", wxPoint(125, 600), wxSize(125, 100));
 	Button2->SetFont(calculatorButtonFont);
 	return nullptr;
 }
 
 wxButton* ButtonFactory::CreateButton3(CalculatorGUI* parentWindow)
 {
-	wxButton* Button3 = new wxButton(parentWindow, 106, "3", wxPoint(250, 600), wxSize(125, 100));
+	wxButton* Button3 = new wxButton(parentWindow, 103, "3", wxPoint(250, 600), wxSize(125, 100));
 	Button3->SetFont(calculatorButtonFont);
-	return nullptr;
-}
-
-wxButton* ButtonFactory::CreateButtonPlus(CalculatorGUI* parentWindow)
-{
-	wxButton* ButtonPlus = new wxButton(parentWindow, 107, "+", wxPoint(375, 600), wxSize(125, 100));
-	ButtonPlus->SetFont(calculatorButtonFont);
 	return nullptr;
 }
 
 wxButton* ButtonFactory::CreateButton4(CalculatorGUI* parentWindow)
 {
-	wxButton* Button4 = new wxButton(parentWindow, 108, "4", wxPoint(0, 500), wxSize(125, 100));
+	wxButton* Button4 = new wxButton(parentWindow, 104, "4", wxPoint(0, 500), wxSize(125, 100));
 	Button4->SetFont(calculatorButtonFont);
 	return nullptr;
 }
 
 wxButton* ButtonFactory::CreateButton5(CalculatorGUI* parentWindow)
 {
-	wxButton* Button5 = new wxButton(parentWindow, 109, "5", wxPoint(125, 500), wxSize(125, 100));
+	wxButton* Button5 = new wxButton(parentWindow, 105, "5", wxPoint(125, 500), wxSize(125, 100));
 	Button5->SetFont(calculatorButtonFont);
 	return nullptr;
 }
 
 wxButton* ButtonFactory::CreateButton6(CalculatorGUI* parentWindow)
 {
-	wxButton* Button6 = new wxButton(parentWindow, 110, "6", wxPoint(250, 500), wxSize(125, 100));
+	wxButton* Button6 = new wxButton(parentWindow, 106, "6", wxPoint(250, 500), wxSize(125, 100));
 	Button6->SetFont(calculatorButtonFont);
-	return nullptr;
-}
-
-wxButton* ButtonFactory::CreateButtonMinus(CalculatorGUI* parentWindow)
-{
-	wxButton* ButtonMinus = new wxButton(parentWindow, 111, "-", wxPoint(375, 500), wxSize(125, 100));
-	ButtonMinus->SetFont(calculatorButtonFont);
 	return nullptr;
 }
 
 wxButton* ButtonFactory::CreateButton7(CalculatorGUI* parentWindow)
 {
-	wxButton* Button7 = new wxButton(parentWindow, 112, "7", wxPoint(0, 400), wxSize(125, 100));
+	wxButton* Button7 = new wxButton(parentWindow, 107, "7", wxPoint(0, 400), wxSize(125, 100));
 	Button7->SetFont(calculatorButtonFont);
 	return nullptr;
 }
 
 wxButton* ButtonFactory::CreateButton8(CalculatorGUI* parentWindow)
 {
-	wxButton* Button8 = new wxButton(parentWindow, 113, "8", wxPoint(125, 400), wxSize(125, 100));
+	wxButton* Button8 = new wxButton(parentWindow, 108, "8", wxPoint(125, 400), wxSize(125, 100));
 	Button8->SetFont(calculatorButtonFont);
 	return nullptr;
 }
 
 wxButton* ButtonFactory::CreateButton9(CalculatorGUI* parentWindow)
 {
-	wxButton* Button9 = new wxButton(parentWindow, 114, "9", wxPoint(250, 400), wxSize(125, 100));
+	wxButton* Button9 = new wxButton(parentWindow, 109, "9", wxPoint(250, 400), wxSize(125, 100));
 	Button9->SetFont(calculatorButtonFont);
 	return nullptr;
 }
+
+/////////non-numeric & operand buttons wxIDs 110-119
+/////////Negative,Dot,Equals,plus,minus,mult,squared,AbsVal,mod,divide
+wxButton* ButtonFactory::CreateButtonNeg(CalculatorGUI* parentWindow)
+{
+	wxButton* ButtonNeg = new wxButton(parentWindow, 110, "+/-", wxPoint(0, 700), wxSize(125, 100));
+	ButtonNeg->SetFont(calculatorButtonFont);
+	return ButtonNeg;
+}
+
+wxButton* ButtonFactory::CreateButtonDot(CalculatorGUI* parentWindow)
+{
+	wxButton* ButtonDot = new wxButton(parentWindow, 111, ".", wxPoint(250, 700), wxSize(125, 100));
+	ButtonDot->SetFont(calculatorButtonFont);
+	return nullptr;
+}
+
+wxButton* ButtonFactory::CreateButtonEquals(CalculatorGUI* parentWindow)
+{
+	wxButton* ButtonEquals = new wxButton(parentWindow, 112, "=", wxPoint(375, 700), wxSize(125, 100));
+	ButtonEquals->SetFont(calculatorButtonFont);
+	return nullptr;
+}
+
+
+wxButton* ButtonFactory::CreateButtonPlus(CalculatorGUI* parentWindow)
+{
+	wxButton* ButtonPlus = new wxButton(parentWindow, 113, "+", wxPoint(375, 600), wxSize(125, 100));
+	ButtonPlus->SetFont(calculatorButtonFont);
+	return nullptr;
+}
+
+wxButton* ButtonFactory::CreateButtonMinus(CalculatorGUI* parentWindow)
+{
+	wxButton* ButtonMinus = new wxButton(parentWindow, 114, "-", wxPoint(375, 500), wxSize(125, 100));
+	ButtonMinus->SetFont(calculatorButtonFont);
+	return nullptr;
+}
+
 
 wxButton* ButtonFactory::CreateButtonMult(CalculatorGUI* parentWindow)
 {
@@ -146,6 +147,7 @@ wxButton* ButtonFactory::CreateButtonDiv(CalculatorGUI* parentWindow)
 	return nullptr;
 }
 
+/////////Hex,Dec,Bin,Clear function buttons -- wxIDs 120-123
 wxButton* ButtonFactory::CreateButtonHex(CalculatorGUI* parentWindow)
 {
 	wxButton* ButtonHex = new wxButton(parentWindow, 120, "Hex", wxPoint(0, 200), wxSize(125, 100));
@@ -164,7 +166,6 @@ wxButton* ButtonFactory::CreateButtonBin(CalculatorGUI* parentWindow)
 {
 	wxButton* ButtonBin = new wxButton(parentWindow, 122, "Bin", wxPoint(250, 200), wxSize(125, 100));
 	ButtonBin->SetFont(calculatorButtonFont);
-	allButtons.push_back(ButtonBin);
 	return nullptr;
 }
 

@@ -9,9 +9,10 @@ private:
 	wxWindowBase* _parentWindow;
 
 public:
-	std::vector<wxButton*> allButtons;
-	std::map<int, std::string> allButtonsMap;
-
+	
+	//typedef std::pair<int, wxString> myPair;
+	//std::map<myPair,wxButton> allButtonsMap;
+	std::map<int, wxString> allButtonsMap;
 	wxButton* CreateButtonNeg(CalculatorGUI* parentWindow);
 	wxButton* CreateButton0(CalculatorGUI* parentWindow);
 	wxButton* CreateButtonDot(CalculatorGUI* parentWindow);

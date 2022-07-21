@@ -92,12 +92,19 @@ void CalculatorGUI::ClickEquals(int firstInput, int secondInput, std::string cho
 }
 
 void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
+	
 	CalculatorProcessor* processor = CalculatorProcessor::GetInstance();
 	int theID = evt.GetId();
 	int firstInput = 0;
 	int secondInput = 0;
 	std::string chosenOperand = " ";
 	//100 = neg, 102 = dot, 103 = =,107 = +, 111 = -, 115 = *, 116 = ^2, 117 = |x|, 118 = %, 119 = /, 120 = hex, 121 = dec, 122 = bin, 123 = C
+	if (theID < 111) {
+		
+		//displayTextbox->AppendText();
+	}
+	
+	
 	wxString buttonLabels2[] = {"+/-", "0",".","=","1","2","3","+","4","5","6","-","7","8","9","*","x^2","|x|","mod (%)","/","Hex","Dec","Bin","C"};
 	switch (theID) {
 	case 100: { //negative
@@ -111,11 +118,10 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 		displayTextbox->AppendText(buttonLabels2[2]); break; }
 	case 103: { //equals
 		secondInput = ValueFromTxtCtrlToInt(displayTextbox);
-		chosenOperand = ValueFromTxtCtrlToInt(displayOperand);
-		CalculatorProcessor::ClickEquals(firstInput, secondInput, chosenOperand);
 
-		int myResult = processor->GetTheResults();
-		displayTextbox->AppendText(IntToWXString(myResult));
+		processor->ClickEquals(firstInput, secondInput, chosenOperand);
+		wxString myResult = IntToWXString(processor->GetTheResults());
+		displayTextbox->AppendText(myResult);
 		displayPrevInput->Clear();
 		displayOperand->Clear();
 		break; }
