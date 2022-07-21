@@ -14,6 +14,7 @@
 
 	std::vector<IBaseCommand*> commandQueue;
 
+	
 	int main()
 	{
 		OperandAdd AddCommand;
@@ -32,24 +33,31 @@
 		commandQueue.push_back(&SquareCommand);
 		commandQueue.push_back(&AbsValCommand);
 	}
-	int CalculatorProcessor::ClickEquals(int firstInput, int secondInput, int chosenOperand)
+	int CalculatorProcessor::ClickEquals(int firstInput, int secondInput, std::string chosenOperand)
 	{
-		//107 = +, 111 = -, 115 = *, 116 = ^ 2, 117 = | x | , 118 = %, 119 = / , 120 = hex, 121 = dec, 122 = bin,
-		switch (chosenOperand) {
-		case 107: {
-			commandQueue[0]->Execute(); break; }
-		case 111: {
-			commandQueue[1]->Execute(); break; }
-		case 115: {
-			commandQueue[4]->Execute(); break; }
-		case 116: {
-			commandQueue[5]->Execute(); break; }
-		case 117: {
-			commandQueue[6]->Execute(); break; }
-		case 118: {
-			commandQueue[3]->Execute(); break; }
-		case 119: {
-			commandQueue[2]->Execute(); break; }
+		
+		_processor->SetFirstInput(firstInput);
+		_processor->SetSecondInput(secondInput);
+		if (chosenOperand == "AddCommand") {
+			commandQueue[0]->Execute();
 		}
-		return 0;
+		else if (chosenOperand == "SubtractCommand") {
+			commandQueue[1]->Execute();
+		}
+		else if (chosenOperand == "DivideCommand") {
+			commandQueue[2]->Execute();
+		}
+		else if (chosenOperand == "ModCommand") {
+			commandQueue[3]->Execute();
+		}
+		else if (chosenOperand == "MultCommand") {
+			commandQueue[4]->Execute();
+		}
+		else if (chosenOperand == "SquareCommand") {
+			commandQueue[5]->Execute();
+		}
+		else if (chosenOperand == "AbsValCommand") {
+			commandQueue[6]->Execute();
+		}
+		return _processor->GetTheResults();
 	}

@@ -23,7 +23,7 @@ public:
 
 	int ValueFromTxtCtrlToInt(wxTextCtrl* display);
 	wxString IntToWXString(int x);
-	void ClickEquals(int firstInput, int secondInput,int theChosenOperand);
+	void ClickEquals(int firstInput, int secondInput, std::string theChosenOperand);
 	
 	void onButtonClick(wxCommandEvent& evt);
 	

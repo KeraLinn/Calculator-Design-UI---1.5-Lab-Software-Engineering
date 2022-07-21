@@ -85,24 +85,18 @@ wxString CalculatorGUI::IntToWXString(int x)
 	return theString;
 }
 
-void CalculatorGUI::ClickEquals(int firstInput, int secondInput, int chosenOperand)
+void CalculatorGUI::ClickEquals(int firstInput, int secondInput, std::string chosenOperand)
 {
 	
-	CalculatorProcessor::ClickEquals(firstInput, secondInput, chosenOperand);
-	IBaseCommand* myResults = nullptr;
-	myResults->theFinalResult;
-	displayTextbox->AppendText(IntToWXString((int)myResults));
-	displayPrevInput->Clear();
-	displayOperand->Clear();
 
 }
 
 void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
-
+	CalculatorProcessor* processor = CalculatorProcessor::GetInstance();
 	int theID = evt.GetId();
 	int firstInput = 0;
 	int secondInput = 0;
-	int chosenOperand;
+	std::string chosenOperand = " ";
 	//100 = neg, 102 = dot, 103 = =,107 = +, 111 = -, 115 = *, 116 = ^2, 117 = |x|, 118 = %, 119 = /, 120 = hex, 121 = dec, 122 = bin, 123 = C
 	wxString buttonLabels2[] = {"+/-", "0",".","=","1","2","3","+","4","5","6","-","7","8","9","*","x^2","|x|","mod (%)","/","Hex","Dec","Bin","C"};
 	switch (theID) {
@@ -118,7 +112,12 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 	case 103: { //equals
 		secondInput = ValueFromTxtCtrlToInt(displayTextbox);
 		chosenOperand = ValueFromTxtCtrlToInt(displayOperand);
-		ClickEquals(firstInput, secondInput, chosenOperand);
+		CalculatorProcessor::ClickEquals(firstInput, secondInput, chosenOperand);
+
+		int myResult = processor->GetTheResults();
+		displayTextbox->AppendText(IntToWXString(myResult));
+		displayPrevInput->Clear();
+		displayOperand->Clear();
 		break; }
 #pragma region Buttons 1,2,3
 	case 104: {displayTextbox->AppendText(buttonLabels2[4]); break; }
@@ -128,7 +127,7 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 	case 107: { //plus
 		firstInput = ValueFromTxtCtrlToInt(displayTextbox);
 		displayPrevInput->AppendText(IntToWXString(firstInput));
-		chosenOperand = 107;
+		chosenOperand = "AddCommand";
 		displayOperand->AppendText(buttonLabels2[7]);
 		displayTextbox->Clear();
 		break; }

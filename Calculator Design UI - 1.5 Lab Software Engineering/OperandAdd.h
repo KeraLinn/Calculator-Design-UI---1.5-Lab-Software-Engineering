@@ -2,16 +2,25 @@
 #include "IBaseCommand.h"
 
 class OperandAdd : public IBaseCommand {
+	
+private:
+	
+	//static OperandAdd* _opsAddition;
+	
 public:
-	int a = 0;
-	int b = 0;
+	OperandAdd() {};
+	/*static OperandAdd* GetInstance() {
+		if (_opsAddition == nullptr) {
+			_opsAddition = new OperandAdd();
+		}
+		return _opsAddition;
+	}*/
 
-	int operandAdd() {
-		int resultsAdd = a + b;
-		didExecute = true;
-		return resultsAdd;
-	}
+
+	int operandAdd();
+
 	void Execute() {
 		operandAdd();
 	}
+	
 };

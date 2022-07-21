@@ -10,6 +10,9 @@ private:
 	CalculatorProcessor() {};
 	static CalculatorProcessor* _processor;
 	int baseNumber = 0;
+	int theFirstInput;
+	int theSecondInput;
+	int theReturnResult;
 
 public:
 	
@@ -22,7 +25,26 @@ public:
 	void SetBaseNumber(int number) {
 		baseNumber = number;
 	}
-	
+	void SetFirstInput(int number) {
+		theFirstInput = number;
+	}
+	int GetFirstInput() {
+		return theFirstInput;
+	}
+	void SetSecondInput(int number) {
+		theSecondInput = number;
+	}
+	int GetSecondInput() {
+		return theSecondInput;
+	}
+	void SetTheResults(int num) {
+		theReturnResult = num;
+	}
+	int GetTheResults() {
+		return theReturnResult;
+	}
+
+
 	CalculatorProcessor(CalculatorProcessor& copy) = delete;
 	void operator=(const CalculatorProcessor& assign) = delete;
 
@@ -75,6 +97,6 @@ public:
 		return binaryResults;
 	}
 
-	static int ClickEquals(int firstInput, int secondInput, int chosenOperand);
+	static int ClickEquals(int firstInput, int secondInput, std::string chosenOperand);
 };
 

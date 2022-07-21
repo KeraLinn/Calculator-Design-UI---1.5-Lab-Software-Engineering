@@ -160,6 +160,7 @@
     <ClCompile Include="CalculatorGUI.cpp" />
     <ClCompile Include="CalculatorProcessor.cpp" />
     <ClCompile Include="IBaseCommand.cpp" />
+    <ClCompile Include="OperandAdd.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Calculator Design UI - 1.5 Lab Software Engineering.rc" />
