@@ -16,36 +16,32 @@ CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculato
 #pragma region ////Code for Cosmetics////
 	//Ideally space is for colors/color dialogs, pencolors/fonts etc.
 	wxFont calculatorDisplayFont(72, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
-	wxFont operandDisplayFont(20, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false);
+	wxFont operandDisplayFont(30, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false);
 	wxFont prevInputDisplayFont(25, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false);
+	wxFont staticTextboxFont(14, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
+	
 #pragma endregion	
 
-	/*displayTextbox = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(5, 0), wxSize(150, 200), wxTE_CENTER);
-	displayTextbox->SetFont(calculatorDisplayFont);
-	
-	displayOperand = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(165, 0), wxSize(150, 200), wxTE_CENTER);
-	displayOperand->SetFont(calculatorDisplayFont);
-
-	displayTextbox2 = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(325, 0), wxSize(150, 200), wxTE_CENTER);
-	displayTextbox2->SetFont(calculatorDisplayFont);
-*/
-
-	
-
-	//displayPrevInput = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(0, 100), wxSize(100, 100), wxTE_CENTER);
-	//displayPrevInput->SetFont(prevInputDisplayFont);
-
-
+#pragma region ////wxTextCtrls & wxStaticText Code////
 	displayTextbox = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(100, 0), wxSize(400, 200), wxTE_RIGHT);
 	displayTextbox->SetFont(calculatorDisplayFont);
-	
-	displayOperand = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(0, 0), wxSize(100, 100),wxTE_CENTER);
+
+	operandTxtCtrlLabel = new wxStaticText(this, wxID_ANY, "Operand", wxPoint(0, 0), wxSize(100, 25), wxTE_CENTER);
+	operandTxtCtrlLabel->SetFont(staticTextboxFont);
+	operandTxtCtrlLabel->SetBackgroundColour(*wxLIGHT_GREY);
+
+	displayOperand = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(0, 25), wxSize(100, 75), wxTE_CENTER);
 	displayOperand->SetFont(operandDisplayFont);
 
-	displayPrevInput = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(0, 100), wxSize(100, 100), wxTE_CENTER);
-	displayPrevInput->SetFont(prevInputDisplayFont);
+	prevInputTxtCtrlLabel = new wxStaticText(this, wxID_ANY, "Last Input", wxPoint(0, 100), wxSize(100, 25), wxTE_CENTER);
+	prevInputTxtCtrlLabel->SetFont(staticTextboxFont);
+	prevInputTxtCtrlLabel->SetBackgroundColour(*wxLIGHT_GREY);
 
-#pragma region Button Factory
+	displayPrevInput = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(0, 125), wxSize(100, 75), wxTE_CENTER);
+	displayPrevInput->SetFont(prevInputDisplayFont);
+#pragma endregion
+
+#pragma region ////Button Factory & Creating Buttons////
 	ButtonFactory factory{};
 	wxButton* ButtonNeg = factory.CreateButtonNeg(this);
 	wxButton* Button0 = factory.CreateButton0(this);
@@ -141,24 +137,17 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 			int firstInput = ValueFromTxtCtrlToInt(displayTextbox);
 			processor->SetFirstInput(firstInput);
 			displayOperand->AppendText("+");
-			displayPrevInput->AppendText(IntToWXString(firstInput));
-			//IBaseCommand* addCommand;
-			
+			displayPrevInput->AppendText(IntToWXString(firstInput));			
 			displayTextbox->Clear();
 			break; }
 		}
 		
 	}
 	else {
-		
 		///equals case
 		int secondInput = ValueFromTxtCtrlToInt(displayTextbox);
 		processor->SetSecondInput(secondInput);
 		displayTextbox->Clear();
-		
-		
-		
-		//IBaseCommand* whatHaveIChosen;
 		int theAnswer = processor->ClickEquals(processor->GetFirstInput(), processor->GetSecondInput());
 		wxString finalAnswer = IntToWXString(theAnswer);
 		displayTextbox->AppendText(finalAnswer);
@@ -212,12 +201,5 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 	//}
 	//evt.GetSkipped();
 }
-
-//wxString ClickEqualsDone(int firstInput, int secondInput, IBaseCommand* choice) {
-//	IBaseCommand* myChoiceOps = choice;
-//	myChoiceOps->Execute();
-//}
-
-
 
 

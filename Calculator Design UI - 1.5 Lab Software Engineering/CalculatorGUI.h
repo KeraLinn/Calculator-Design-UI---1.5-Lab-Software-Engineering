@@ -13,12 +13,15 @@ private:
 	wxButton* Button0, *Button1, *Button2, * Button3, * Button4, * Button5, * Button6, * Button7, * Button8, * Button9, * ButtonDot, * ButtonEquals, * ButtonPlus, * ButtonMinus, * ButtonDiv, * ButtonMult, * ButtonMod, * ButtonNeg, * ButtonHex, * ButtonDec, * ButtonBin, * ButtonClear, *ButtonSquared,*ButtonAbsVal;
 
 public:
-	int xWidth = 4;
-	int yHeight = 6;
+	//displayTextControls
 	wxTextCtrl* displayTextbox = nullptr;
-	wxTextCtrl* displayTextbox2 = nullptr;
 	wxTextCtrl* displayOperand = nullptr;
 	wxTextCtrl* displayPrevInput = nullptr;
+	
+	//displayLabels
+	wxStaticText* operandTxtCtrlLabel = nullptr;
+	wxStaticText* prevInputTxtCtrlLabel = nullptr;
+	
 	int firstInput = 0;
 	int secondInput = 0;
 	int theResults;
@@ -29,7 +32,7 @@ public:
 
 	
 	void onButtonClick(wxCommandEvent& evt);
-	wxString ClickEqualsDone(int firstInput, int secondInput);
+
 
 	wxDECLARE_EVENT_TABLE();
 };
