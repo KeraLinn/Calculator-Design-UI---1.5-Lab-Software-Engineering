@@ -1,17 +1,20 @@
 #pragma once
 #include "IBaseCommand.h"
-#include "CalculatorGUI.h"
 
-//class OperandMod : public IBaseCommand {
-//public:
-//	int a = 0;
-//	int b = 0;
-//
-//	int operandMod() {
-//		int resultsMod = a % b;
-//		return resultsMod;
-//	}
-//	int Execute() {
-//		operandMod();
-//	}
-//};
+class OperandMod : public IBaseCommand {
+public:
+	OperandMod() {};
+	int resultsMod;
+
+	int operandMod() {
+		CalculatorProcessor* myProcessor = CalculatorProcessor::GetInstance();
+		int a = myProcessor->GetFirstInput();
+		int b = myProcessor->GetSecondInput();
+		resultsMod = a % b;
+		return resultsMod;
+	}
+	int Execute() {
+		operandMod();
+		return resultsMod;
+	}
+};

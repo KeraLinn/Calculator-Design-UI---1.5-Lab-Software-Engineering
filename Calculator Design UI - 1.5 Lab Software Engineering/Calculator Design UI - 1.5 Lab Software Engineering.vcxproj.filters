@@ -74,9 +74,6 @@
     <ClCompile Include="IBaseCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OperandAdd.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Calculator Design UI - 1.5 Lab Software Engineering.rc">

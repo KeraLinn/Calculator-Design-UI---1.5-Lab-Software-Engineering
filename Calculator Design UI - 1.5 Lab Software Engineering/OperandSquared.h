@@ -1,16 +1,20 @@
 #pragma once
 #include "IBaseCommand.h"
 
-//class OperandSquared : public IBaseCommand {
-//public:
-//	int a = 0;
-//
-//
-//	int operandSquareVal() {
-//		int resultsSquareVal = a * a;
-//		return resultsSquareVal;
-//	}
-//	int Execute() {
-//		operandSquareVal();
-//	}
-//};
+class OperandSquared : public IBaseCommand {
+public:
+	OperandSquared() {};
+	int resultsSquareVal;
+
+
+	int operandSquareVal() {
+		CalculatorProcessor* myProcessor = CalculatorProcessor::GetInstance();
+		int a = myProcessor->GetFirstInput();
+		resultsSquareVal = a * a;
+		return resultsSquareVal;
+	}
+	int Execute() {
+		operandSquareVal();
+		return resultsSquareVal;
+	}
+};

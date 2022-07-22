@@ -128,39 +128,70 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 	}
 	else if (theID > 112) {
 		switch (theID) {
-		case 113: { //plus
+		//add
+		case 113: {
 			int firstInput = ValueFromTxtCtrlToInt(displayTextbox);
 			processor->SetFirstInput(firstInput);
 			processor->SetTheOperator(theID);
 			displayOperand->AppendText("+");
 			displayPrevInput->AppendText(IntToWXString(firstInput));
-			displayTextbox->Clear();
-			break; }
+			displayTextbox->Clear(); break; }
+		//subtract
 		case 114: { //minus
 			int firstInput = ValueFromTxtCtrlToInt(displayTextbox);
 			processor->SetFirstInput(firstInput);
 			processor->SetTheOperator(theID);
 			displayOperand->AppendText("-");
 			displayPrevInput->AppendText(IntToWXString(firstInput));
-			
-			displayTextbox->Clear();
+			displayTextbox->Clear(); break; }
+		//mult
+		case 115: {
+			int firstInput = ValueFromTxtCtrlToInt(displayTextbox);
+			processor->SetFirstInput(firstInput);
+			processor->SetTheOperator(theID);
+			displayOperand->AppendText("*"); 
+			displayPrevInput->AppendText(IntToWXString(firstInput));
+			displayTextbox->Clear(); break; }
+		//squared
+		case 116: { 
+			int firstInput = ValueFromTxtCtrlToInt(displayTextbox);
+			processor->SetFirstInput(firstInput);
+			processor->SetTheOperator(theID);
+			displayOperand->AppendText("x^2"); 
+			displayPrevInput->AppendText(IntToWXString(firstInput));
+			displayTextbox->Clear(); 
+			int theAnswer = processor->ClickEquals(processor->GetFirstInput(),NULL);
+			wxString finalAnswer = IntToWXString(theAnswer);
+			displayTextbox->AppendText(finalAnswer); 
 			break; }
-		case 115: { //mult
-			displayOperand->AppendText("*"); break; }
-		case 116: { //squared
-			displayOperand->AppendText("x^2"); break; }
 		case 117: { //absolute value
-			displayOperand->AppendText("|x|"); break; }
-		case 118: {//mod
-			displayOperand->AppendText("%"); break; }
-		case 119: {//divide
-			displayOperand->AppendText("/"); break; }
-		
-		
-		
-		
-		
-		
+			int firstInput = ValueFromTxtCtrlToInt(displayTextbox);
+			processor->SetFirstInput(firstInput);
+			processor->SetTheOperator(theID);
+			displayOperand->AppendText("|x|"); 
+			displayPrevInput->AppendText(IntToWXString(firstInput));
+			displayTextbox->Clear();
+			int theAnswer = processor->ClickEquals(processor->GetFirstInput(), NULL);
+			wxString finalAnswer = IntToWXString(theAnswer);
+			displayTextbox->AppendText(finalAnswer);
+			break; }
+		//mod
+		case 118: {
+			int firstInput = ValueFromTxtCtrlToInt(displayTextbox);
+			processor->SetFirstInput(firstInput);
+			processor->SetTheOperator(theID);
+			displayOperand->AppendText("%"); 
+			displayPrevInput->AppendText(IntToWXString(firstInput));
+			displayTextbox->Clear(); break; }
+		//divide
+		case 119: {
+			int firstInput = ValueFromTxtCtrlToInt(displayTextbox);
+			processor->SetFirstInput(firstInput);
+			processor->SetTheOperator(theID);
+			displayOperand->AppendText("/"); 
+			displayPrevInput->AppendText(IntToWXString(firstInput));
+			displayTextbox->Clear(); break; }
+
 		case 120: {//hex
 			displayOperand->AppendText("Hex"); break; }
 		case 121: {//dec
@@ -168,7 +199,10 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 		case 122: {//bin
 			displayOperand->AppendText("Bin"); break; }
 		case 123: { //clear
-			displayOperand->Clear(); break; }
+			displayTextbox->Clear(); 
+			displayOperand->Clear();
+			displayPrevInput->Clear();
+			break; }
 		}
 	}
 	else { ///Equals Case
