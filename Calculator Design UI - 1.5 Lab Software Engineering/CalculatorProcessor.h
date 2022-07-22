@@ -11,6 +11,7 @@ private:
 	CalculatorProcessor() {};
 	static CalculatorProcessor* _processor;
 	int baseNumber = 0;
+	
 	int theFirstInput;
 	int theSecondInput;
 	int theReturnResult;
@@ -18,7 +19,7 @@ private:
 	int theCommand;
 
 public:
-	
+#pragma region Getters & Setters
 	static CalculatorProcessor* GetInstance() {
 		if (_processor == nullptr) {
 			_processor = new CalculatorProcessor();
@@ -26,8 +27,12 @@ public:
 		return _processor;
 	}
 	void SetBaseNumber(int number) {
-		baseNumber = number;
-	}
+		baseNumber = number; }
+	int GetBaseNumber() {
+		return baseNumber; }
+	
+	
+	
 	void SetFirstInput(int number) {
 		theFirstInput = number;
 	}
@@ -52,12 +57,22 @@ public:
 	int GetTheOperator() {
 		return theCommand;
 	}
+#pragma endregion
 
 	CalculatorProcessor(CalculatorProcessor& copy) = delete;
 	void operator=(const CalculatorProcessor& assign) = delete;
-
-	std::string GetDecimal() {
-		return std::to_string(baseNumber);
+	
+	int ClickEquals(int firstInput, int secondInput);
+	
+	int GetDecimal(int firstInput) {
+		int remainder, decimal = 0, i = 0;
+		while (firstInput != 0) {
+			remainder = firstInput % 10;
+			firstInput /= 10;
+			decimal += remainder * pow(2, i);
+			++i;
+		}
+		return decimal;
 	}
 	std::string GetHexadecimal() {
 		std::string hexadecimalResults = "";
@@ -92,19 +107,19 @@ public:
 	}
 	std::string GetBinary() {
 		std::string binaryResults = "";
-		int number = baseNumber;
+		GetBaseNumber();
 		for (int i = 0; i < 32; i++) {
-			if (number % 2 == 0) {
+			if (baseNumber % 2 == 0) {
 				binaryResults = "0" + binaryResults;
 			}
 			else {
 				binaryResults = "1" + binaryResults;
 			}
-			number = number / 2;
+			baseNumber = baseNumber / 2;
 		}
 		return binaryResults;
 	}
 
-	int ClickEquals(int firstInput, int secondInput);
+	
 };
 

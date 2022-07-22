@@ -6,6 +6,9 @@
 #include "OperandMod.h"
 #include "OperandSquared.h"
 #include "OperandSubtract.h"
+#include "BinaryTranslate.h"
+#include "HexadecimalTranslate.h"
+#include "DecimalTranslate.h"
 #include <vector>
 #include "IBaseCommand.h"
 
@@ -71,31 +74,6 @@
 			break;	}
 		}
 
-		/*else if (chosenOperand == 114) {
-			commandQueue[1]->Execute();
-			return _processor->GetTheResults();
-		}
-		else if (chosenOperand == 115) {
-			commandQueue[2]->Execute();
-			return _processor->GetTheResults();
-		}
-		else if (chosenOperand == 116) {
-			commandQueue[3]->Execute();
-			return _processor->GetTheResults();
-		}
-		else if (chosenOperand == 117) {
-			commandQueue[4]->Execute();
-			return _processor->GetTheResults();
-		}
-		else if (chosenOperand == 118) {
-			commandQueue[5]->Execute();
-			return _processor->GetTheResults();
-		}
-		else if (chosenOperand == 119) {
-			commandQueue[6]->Execute();
-			return _processor->GetTheResults();
-		}*/
-		//return _processor->GetTheResults();
 		return theResults;
 	}
 

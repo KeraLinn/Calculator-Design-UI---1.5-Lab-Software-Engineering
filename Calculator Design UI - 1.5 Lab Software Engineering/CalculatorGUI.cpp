@@ -15,7 +15,7 @@ CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculato
 
 #pragma region ////Code for Cosmetics////
 	//Ideally space is for colors/color dialogs, pencolors/fonts etc.
-	wxFont calculatorDisplayFont(72, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
+	wxFont calculatorDisplayFont(60, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
 	wxFont operandDisplayFont(30, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false);
 	wxFont prevInputDisplayFont(25, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false);
 	wxFont staticTextboxFont(14, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
@@ -69,13 +69,6 @@ CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculato
 	wxButton* ButtonClear = factory.CreateButtonClear(this);
 #pragma endregion
 
-
-	CalculatorProcessor* processor = CalculatorProcessor::GetInstance();
-
-	processor->SetBaseNumber(198);
-	std::cout << "Decimal: " << processor->GetDecimal() << std::endl;
-	std::cout << "Binary: " << processor->GetBinary() << std::endl;
-	std::cout << "Hexadecimal: " << processor->GetHexadecimal() << std::endl;
 }
 
 CalculatorGUI::~CalculatorGUI()
@@ -191,14 +184,33 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 			displayOperand->AppendText("/"); 
 			displayPrevInput->AppendText(IntToWXString(firstInput));
 			displayTextbox->Clear(); break; }
-
-		case 120: {//hex
+		//Hex
+		case 120: {
+			
+			processor->SetFirstInput(firstInput);
 			displayOperand->AppendText("Hex"); break; }
-		case 121: {//dec
-			displayOperand->AppendText("Dec"); break; }
-		case 122: {//bin
-			displayOperand->AppendText("Bin"); break; }
-		case 123: { //clear
+		//Dec
+		case 121: {
+			int firstInput = ValueFromTxtCtrlToInt(displayTextbox);
+			displayOperand->AppendText("Dec");
+			processor->GetDecimal(firstInput);
+			displayTextbox->AppendText(IntToWXString(processor->GetDecimal(firstInput)));
+			break; }
+		//Bin
+		case 122: {
+			int firstInput = ValueFromTxtCtrlToInt(displayTextbox);
+			processor->SetBaseNumber(firstInput); 
+			
+			displayOperand->AppendText("Bin"); 
+			displayPrevInput->AppendText(IntToWXString(firstInput));
+			displayTextbox->Clear();
+			
+			std::string theAnswer = processor->GetBinary();
+			wxString finalAnswer(theAnswer);
+			displayTextbox->AppendText(finalAnswer); 
+			break; }
+		//Clear
+		case 123: { 
 			displayTextbox->Clear(); 
 			displayOperand->Clear();
 			displayPrevInput->Clear();
