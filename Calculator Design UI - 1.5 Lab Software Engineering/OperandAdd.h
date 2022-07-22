@@ -6,7 +6,6 @@ class OperandAdd : public IBaseCommand {
 	
 public:
 	OperandAdd() {};
-	wxString whatResults;
 	int resultsAdd;
 
 	int operandAdd() {

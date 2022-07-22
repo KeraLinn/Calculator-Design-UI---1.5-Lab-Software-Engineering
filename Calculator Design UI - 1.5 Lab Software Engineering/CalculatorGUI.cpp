@@ -82,7 +82,6 @@ CalculatorGUI::~CalculatorGUI()
 {
 }
 
-
 int CalculatorGUI::ValueFromTxtCtrlToInt(wxTextCtrl* display)
 {
 	wxString str = display->GetValue();
@@ -106,10 +105,6 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 	CalculatorProcessor* processor = CalculatorProcessor::GetInstance();
 	
 	int theID = evt.GetId();
-	//int firstInput = 0;
-	//int secondInput = 0;
-
-	//std::string chosenOperand = " ";
 	//100 = neg, 102 = dot, 103 = =,107 = +, 111 = -, 115 = *, 116 = ^2, 117 = |x|, 118 = %, 119 = /, 120 = hex, 121 = dec, 122 = bin, 123 = C
 	if (theID <= 111) {
 		switch (theID) {
@@ -133,73 +128,63 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 	}
 	else if (theID > 112) {
 		switch (theID) {
-		case 113: {
+		case 113: { //plus
 			int firstInput = ValueFromTxtCtrlToInt(displayTextbox);
 			processor->SetFirstInput(firstInput);
+			processor->SetTheOperator(theID);
 			displayOperand->AppendText("+");
-			displayPrevInput->AppendText(IntToWXString(firstInput));			
+			displayPrevInput->AppendText(IntToWXString(firstInput));
 			displayTextbox->Clear();
 			break; }
-		}
+		case 114: { //minus
+			int firstInput = ValueFromTxtCtrlToInt(displayTextbox);
+			processor->SetFirstInput(firstInput);
+			processor->SetTheOperator(theID);
+			displayOperand->AppendText("-");
+			displayPrevInput->AppendText(IntToWXString(firstInput));
+			
+			displayTextbox->Clear();
+			break; }
+		case 115: { //mult
+			displayOperand->AppendText("*"); break; }
+		case 116: { //squared
+			displayOperand->AppendText("x^2"); break; }
+		case 117: { //absolute value
+			displayOperand->AppendText("|x|"); break; }
+		case 118: {//mod
+			displayOperand->AppendText("%"); break; }
+		case 119: {//divide
+			displayOperand->AppendText("/"); break; }
 		
+		
+		
+		
+		
+		
+		case 120: {//hex
+			displayOperand->AppendText("Hex"); break; }
+		case 121: {//dec
+			displayOperand->AppendText("Dec"); break; }
+		case 122: {//bin
+			displayOperand->AppendText("Bin"); break; }
+		case 123: { //clear
+			displayOperand->Clear(); break; }
+		}
 	}
-	else {
-		///equals case
+	else { ///Equals Case
 		int secondInput = ValueFromTxtCtrlToInt(displayTextbox);
 		processor->SetSecondInput(secondInput);
 		displayTextbox->Clear();
 		int theAnswer = processor->ClickEquals(processor->GetFirstInput(), processor->GetSecondInput());
 		wxString finalAnswer = IntToWXString(theAnswer);
 		displayTextbox->AppendText(finalAnswer);
+		
 		displayPrevInput->Clear();
 		displayOperand->Clear();
 		
 	}
-	//	case 113: {
-	//		firstInput = ValueFromTxtCtrlToInt(displayTextbox);
-	//		displayOperand->AppendText("+");
-	//		displayPrevInput->AppendText(IntToWXString(firstInput));
-	//		myChosenOp = theID;
-	//		displayTextbox->Clear();
-	//		break; }
-	//	case 114: {
-
-	//		break; }
-	//	}
-	//}
-	//
-	//wxString buttonLabels2[] = {"+/-", "0",".","=","1","2","3","+","4","5","6","-","7","8","9","*","x^2","|x|","mod (%)","/","Hex","Dec","Bin","C"};
-	//switch (theID) {
-
-	//case 107: { //plus
-	//	
-	//	displayOperand->AppendText(buttonLabels2[7]);
-	//	displayTextbox->Clear();
-	//	break; }
-
-	//case 111: { //minus
-	//	displayTextbox->AppendText(buttonLabels2[11]); break; }
-
-	//case 115: { //mult
-	//	displayTextbox->AppendText(buttonLabels2[15]); break; }
-	//case 116: { //squared
-	//	displayTextbox->AppendText(buttonLabels2[16]); break; }
-	//case 117: { //absolute value
-	//	displayTextbox->AppendText(buttonLabels2[17]); break; }
-	//case 118: {//mod
-	//	displayTextbox->AppendText(buttonLabels2[18]); break; }
-	//case 119: {//divide
-	//	displayTextbox->AppendText(buttonLabels2[19]); break; }
-	//case 120: {//hex
-	//	displayTextbox->AppendText(buttonLabels2[20]); break; }
-	//case 121: {//dec
-	//	displayTextbox->AppendText(buttonLabels2[21]); break; }
-	//case 122: {//bin
-	//	displayTextbox->AppendText(buttonLabels2[22]); break; }
-	//case 123: { //clear
-	//	displayTextbox->Clear(); break; }
-	//}
-	//evt.GetSkipped();
+	///TODO: figure out how to get the displayTextbox to clear after you hit the equals buttong and then go to hit another button. But NOT change for like hex dec bin///
+	evt.GetSkipped();
 }
 
 

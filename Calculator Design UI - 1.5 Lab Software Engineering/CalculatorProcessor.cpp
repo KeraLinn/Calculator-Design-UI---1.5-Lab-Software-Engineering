@@ -18,31 +18,42 @@
 	int main()
 	{
 		OperandAdd AddCommand;
-		/*OperandSubtract SubtractCommand;
-		OperandDivide DivideCommand;
+		OperandSubtract SubtractCommand;
+		/*OperandDivide DivideCommand;
 		OperandMod ModCommand;
 		OperandMult MultCommand;
 		OperandSquared SquareCommand;
 		OperandAbsoluteValue AbsValCommand;*/
 
 		commandQueue.push_back(&AddCommand);
-		//commandQueue.push_back(&SubtractCommand);
-		//commandQueue.push_back(&DivideCommand);
-		//commandQueue.push_back(&ModCommand);
-		//commandQueue.push_back(&MultCommand);
-		//commandQueue.push_back(&SquareCommand);
-		//commandQueue.push_back(&AbsValCommand);
+		commandQueue.push_back(&SubtractCommand);
+		/*commandQueue.push_back(&DivideCommand);
+		commandQueue.push_back(&ModCommand);
+		commandQueue.push_back(&MultCommand);
+		commandQueue.push_back(&SquareCommand);
+		commandQueue.push_back(&AbsValCommand);*/
 
 	}
 	int CalculatorProcessor::ClickEquals(int firstInput, int secondInput)
 	{		
-		
+		int theResults;
 		_processor->SetFirstInput(firstInput);
 		_processor->SetSecondInput(secondInput);
-		//wxString theResults;
-		OperandAdd myOps;
-		int theResults = myOps.Execute();
-		return theResults;
+		
+		switch (_processor->GetTheOperator()) {
+		case 113: {
+			OperandAdd myOps;
+			theResults = myOps.Execute();
+			break;
+		}
+		case 114: {
+			OperandSubtract myOps;
+			theResults = myOps.Execute();
+			break;
+			//return theResults;
+		}
+		}
+		
 		/*if (chosenOperand == 113) {
 
 			theResults << myOps.Execute();
@@ -75,6 +86,6 @@
 			return _processor->GetTheResults();
 		}*/
 		//return _processor->GetTheResults();
-		//return theResults;
+		return theResults;
 	}
 

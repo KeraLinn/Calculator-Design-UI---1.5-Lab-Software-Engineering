@@ -15,6 +15,7 @@ private:
 	int theSecondInput;
 	int theReturnResult;
 	wxString theReturnResult2;
+	int theCommand;
 
 public:
 	
@@ -45,7 +46,12 @@ public:
 	wxString GetTheResults() {
 		return theReturnResult2;
 	}
-
+	void SetTheOperator(int opsID) {
+		theCommand = opsID;
+	}
+	int GetTheOperator() {
+		return theCommand;
+	}
 
 	CalculatorProcessor(CalculatorProcessor& copy) = delete;
 	void operator=(const CalculatorProcessor& assign) = delete;
