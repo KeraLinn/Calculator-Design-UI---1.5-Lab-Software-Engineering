@@ -20,7 +20,23 @@ CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculato
 	wxFont prevInputDisplayFont(25, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false);
 #pragma endregion	
 
-	displayTextbox = new wxTextCtrl(this, 5000, " ", wxPoint(100, 0), wxSize(400, 200), wxTE_RIGHT);
+	/*displayTextbox = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(5, 0), wxSize(150, 200), wxTE_CENTER);
+	displayTextbox->SetFont(calculatorDisplayFont);
+	
+	displayOperand = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(165, 0), wxSize(150, 200), wxTE_CENTER);
+	displayOperand->SetFont(calculatorDisplayFont);
+
+	displayTextbox2 = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(325, 0), wxSize(150, 200), wxTE_CENTER);
+	displayTextbox2->SetFont(calculatorDisplayFont);
+*/
+
+	
+
+	//displayPrevInput = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(0, 100), wxSize(100, 100), wxTE_CENTER);
+	//displayPrevInput->SetFont(prevInputDisplayFont);
+
+
+	displayTextbox = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(100, 0), wxSize(400, 200), wxTE_RIGHT);
 	displayTextbox->SetFont(calculatorDisplayFont);
 	
 	displayOperand = new wxTextCtrl(this, wxID_ANY, " ", wxPoint(0, 0), wxSize(100, 100),wxTE_CENTER);
@@ -75,6 +91,9 @@ int CalculatorGUI::ValueFromTxtCtrlToInt(wxTextCtrl* display)
 {
 	wxString str = display->GetValue();
 	int theNum = wxAtoi(str);
+	if (str.Contains(".")) {
+		theNum /= 100;
+	}
 	return theNum;
 }
 
@@ -85,91 +104,119 @@ wxString CalculatorGUI::IntToWXString(int x)
 	return theString;
 }
 
-void CalculatorGUI::ClickEquals(int firstInput, int secondInput, std::string chosenOperand)
-{
-	
-
-}
 
 void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 	
 	CalculatorProcessor* processor = CalculatorProcessor::GetInstance();
+	
 	int theID = evt.GetId();
-	int firstInput = 0;
-	int secondInput = 0;
-	std::string chosenOperand = " ";
+	//int firstInput = 0;
+	//int secondInput = 0;
+
+	//std::string chosenOperand = " ";
 	//100 = neg, 102 = dot, 103 = =,107 = +, 111 = -, 115 = *, 116 = ^2, 117 = |x|, 118 = %, 119 = /, 120 = hex, 121 = dec, 122 = bin, 123 = C
-	if (theID < 111) {
-		
-		//displayTextbox->AppendText();
+	if (theID <= 111) {
+		switch (theID) {
+		case 100: {displayTextbox->AppendText(IntToWXString(0)); break; }
+		case 101: {displayTextbox->AppendText(IntToWXString(1)); break; }
+		case 102: {displayTextbox->AppendText(IntToWXString(2)); break; }
+		case 103: {displayTextbox->AppendText(IntToWXString(3)); break; }
+		case 104: {displayTextbox->AppendText(IntToWXString(4)); break; }
+		case 105: {displayTextbox->AppendText(IntToWXString(5)); break; }
+		case 106: {displayTextbox->AppendText(IntToWXString(6)); break; }
+		case 107: {displayTextbox->AppendText(IntToWXString(7)); break; }
+		case 108: {displayTextbox->AppendText(IntToWXString(8)); break; }
+		case 109: {displayTextbox->AppendText(IntToWXString(9)); break; }
+		case 110: {
+			int theNegative = ValueFromTxtCtrlToInt(displayTextbox);
+			displayTextbox->Clear();
+			theNegative = theNegative * -1;
+			displayTextbox->AppendText(IntToWXString(theNegative)); break; }
+		case 111: {displayTextbox->AppendText("."); break; }
+		}
 	}
-	
-	
-	wxString buttonLabels2[] = {"+/-", "0",".","=","1","2","3","+","4","5","6","-","7","8","9","*","x^2","|x|","mod (%)","/","Hex","Dec","Bin","C"};
-	switch (theID) {
-	case 100: { //negative
-		int theNegative = ValueFromTxtCtrlToInt(displayTextbox);
+	else if (theID > 112) {
+		switch (theID) {
+		case 113: {
+			int firstInput = ValueFromTxtCtrlToInt(displayTextbox);
+			processor->SetFirstInput(firstInput);
+			displayOperand->AppendText("+");
+			displayPrevInput->AppendText(IntToWXString(firstInput));
+			//IBaseCommand* addCommand;
+			
+			displayTextbox->Clear();
+			break; }
+		}
+		
+	}
+	else {
+		
+		///equals case
+		int secondInput = ValueFromTxtCtrlToInt(displayTextbox);
+		processor->SetSecondInput(secondInput);
 		displayTextbox->Clear();
-		theNegative = theNegative * -1;
-
-		displayTextbox->AppendText(IntToWXString(theNegative)); break; }
-	case 101: {displayTextbox->AppendText(buttonLabels2[1]); break; }
-	case 102: {//dot
-		displayTextbox->AppendText(buttonLabels2[2]); break; }
-	case 103: { //equals
-		secondInput = ValueFromTxtCtrlToInt(displayTextbox);
-
-		processor->ClickEquals(firstInput, secondInput, chosenOperand);
-		wxString myResult = IntToWXString(processor->GetTheResults());
-		displayTextbox->AppendText(myResult);
+		
+		
+		
+		//IBaseCommand* whatHaveIChosen;
+		int theAnswer = processor->ClickEquals(processor->GetFirstInput(), processor->GetSecondInput());
+		wxString finalAnswer = IntToWXString(theAnswer);
+		displayTextbox->AppendText(finalAnswer);
 		displayPrevInput->Clear();
 		displayOperand->Clear();
-		break; }
-#pragma region Buttons 1,2,3
-	case 104: {displayTextbox->AppendText(buttonLabels2[4]); break; }
-	case 105: {displayTextbox->AppendText(buttonLabels2[5]); break; }
-	case 106: {displayTextbox->AppendText(buttonLabels2[6]); break; }
-#pragma endregion
-	case 107: { //plus
-		firstInput = ValueFromTxtCtrlToInt(displayTextbox);
-		displayPrevInput->AppendText(IntToWXString(firstInput));
-		chosenOperand = "AddCommand";
-		displayOperand->AppendText(buttonLabels2[7]);
-		displayTextbox->Clear();
-		break; }
-#pragma region Buttons 4,5,6
-	case 108: {displayTextbox->AppendText(buttonLabels2[8]); break; }
-	case 109: {displayTextbox->AppendText(buttonLabels2[9]); break; }
-	case 110: {displayTextbox->AppendText(buttonLabels2[10]); break; }
-#pragma endregion
-	case 111: { //minus
-		displayTextbox->AppendText(buttonLabels2[11]); break; }
-#pragma region Buttons 7,8,9
-	case 112: {displayTextbox->AppendText(buttonLabels2[12]); break; }
-	case 113: {displayTextbox->AppendText(buttonLabels2[13]); break; }
-	case 114: {displayTextbox->AppendText(buttonLabels2[14]); break; }
-#pragma endregion
-	case 115: { //mult
-		displayTextbox->AppendText(buttonLabels2[15]); break; }
-	case 116: { //squared
-		displayTextbox->AppendText(buttonLabels2[16]); break; }
-	case 117: { //absolute value
-		displayTextbox->AppendText(buttonLabels2[17]); break; }
-	case 118: {//mod
-		displayTextbox->AppendText(buttonLabels2[18]); break; }
-	case 119: {//divide
-		displayTextbox->AppendText(buttonLabels2[19]); break; }
-	case 120: {//hex
-		displayTextbox->AppendText(buttonLabels2[20]); break; }
-	case 121: {//dec
-		displayTextbox->AppendText(buttonLabels2[21]); break; }
-	case 122: {//bin
-		displayTextbox->AppendText(buttonLabels2[22]); break; }
-	case 123: { //clear
-		displayTextbox->Clear(); break; }
+		
 	}
+	//	case 113: {
+	//		firstInput = ValueFromTxtCtrlToInt(displayTextbox);
+	//		displayOperand->AppendText("+");
+	//		displayPrevInput->AppendText(IntToWXString(firstInput));
+	//		myChosenOp = theID;
+	//		displayTextbox->Clear();
+	//		break; }
+	//	case 114: {
+
+	//		break; }
+	//	}
+	//}
+	//
+	//wxString buttonLabels2[] = {"+/-", "0",".","=","1","2","3","+","4","5","6","-","7","8","9","*","x^2","|x|","mod (%)","/","Hex","Dec","Bin","C"};
+	//switch (theID) {
+
+	//case 107: { //plus
+	//	
+	//	displayOperand->AppendText(buttonLabels2[7]);
+	//	displayTextbox->Clear();
+	//	break; }
+
+	//case 111: { //minus
+	//	displayTextbox->AppendText(buttonLabels2[11]); break; }
+
+	//case 115: { //mult
+	//	displayTextbox->AppendText(buttonLabels2[15]); break; }
+	//case 116: { //squared
+	//	displayTextbox->AppendText(buttonLabels2[16]); break; }
+	//case 117: { //absolute value
+	//	displayTextbox->AppendText(buttonLabels2[17]); break; }
+	//case 118: {//mod
+	//	displayTextbox->AppendText(buttonLabels2[18]); break; }
+	//case 119: {//divide
+	//	displayTextbox->AppendText(buttonLabels2[19]); break; }
+	//case 120: {//hex
+	//	displayTextbox->AppendText(buttonLabels2[20]); break; }
+	//case 121: {//dec
+	//	displayTextbox->AppendText(buttonLabels2[21]); break; }
+	//case 122: {//bin
+	//	displayTextbox->AppendText(buttonLabels2[22]); break; }
+	//case 123: { //clear
+	//	displayTextbox->Clear(); break; }
+	//}
 	//evt.GetSkipped();
 }
+
+//wxString ClickEqualsDone(int firstInput, int secondInput, IBaseCommand* choice) {
+//	IBaseCommand* myChoiceOps = choice;
+//	myChoiceOps->Execute();
+//}
 
 
 

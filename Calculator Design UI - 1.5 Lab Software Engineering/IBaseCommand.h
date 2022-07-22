@@ -5,5 +5,5 @@
 class IBaseCommand
 {
 public:
-	virtual void Execute() = 0;
+	virtual int Execute() = 0;
 };

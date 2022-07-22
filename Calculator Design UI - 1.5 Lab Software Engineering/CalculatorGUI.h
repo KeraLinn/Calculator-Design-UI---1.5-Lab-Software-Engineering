@@ -1,5 +1,6 @@
 #pragma once
 #include "wx/wx.h"
+#include "OperandAdd.h"
 
 class CalculatorGUI : public wxFrame
 {
@@ -15,22 +16,21 @@ public:
 	int xWidth = 4;
 	int yHeight = 6;
 	wxTextCtrl* displayTextbox = nullptr;
+	wxTextCtrl* displayTextbox2 = nullptr;
 	wxTextCtrl* displayOperand = nullptr;
 	wxTextCtrl* displayPrevInput = nullptr;
 	int firstInput = 0;
 	int secondInput = 0;
 	int theResults;
+	OperandAdd addOps;
 
 	int ValueFromTxtCtrlToInt(wxTextCtrl* display);
 	wxString IntToWXString(int x);
-	void ClickEquals(int firstInput, int secondInput, std::string theChosenOperand);
+
 	
 	void onButtonClick(wxCommandEvent& evt);
-	
-	enum operands
-	{
-		add = 1, subtract, mult, divide, mod, square, absVal
-	};
+	wxString ClickEqualsDone(int firstInput, int secondInput);
+
 	wxDECLARE_EVENT_TABLE();
 };
 

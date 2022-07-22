@@ -10,9 +10,8 @@ private:
 
 public:
 	
-	//typedef std::pair<int, wxString> myPair;
-	//std::map<myPair,wxButton> allButtonsMap;
-	std::map<int, wxString> allButtonsMap;
+	//static std::map<int, wxString> allButtonsMap;
+
 	wxButton* CreateButtonNeg(CalculatorGUI* parentWindow);
 	wxButton* CreateButton0(CalculatorGUI* parentWindow);
 	wxButton* CreateButtonDot(CalculatorGUI* parentWindow);

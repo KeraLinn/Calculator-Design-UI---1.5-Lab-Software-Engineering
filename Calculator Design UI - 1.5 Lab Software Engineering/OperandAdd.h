@@ -1,15 +1,26 @@
 #pragma once
 #include "IBaseCommand.h"
+#include "CalculatorProcessor.h"
 
 class OperandAdd : public IBaseCommand {
 	
 public:
 	OperandAdd() {};
+	wxString whatResults;
+	int resultsAdd;
 
-	int operandAdd();
+	int operandAdd() {
+		CalculatorProcessor* myProcessor = CalculatorProcessor::GetInstance();
+		int a = myProcessor->GetFirstInput();
+		int b = myProcessor->GetSecondInput();
 
-	void Execute() {
+		resultsAdd = a + b;
+		return resultsAdd;
+	}
+
+	int Execute() {
 		operandAdd();
+		return resultsAdd;
 	}
 	
 };

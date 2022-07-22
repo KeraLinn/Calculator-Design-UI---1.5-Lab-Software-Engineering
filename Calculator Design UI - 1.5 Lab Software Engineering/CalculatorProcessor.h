@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #pragma warning(disable : 4996)
+#include "wx/wx.h"
 
 //implement this class as a singleton design pattern per the Day 6 lecture
 class CalculatorProcessor 
@@ -13,6 +14,7 @@ private:
 	int theFirstInput;
 	int theSecondInput;
 	int theReturnResult;
+	wxString theReturnResult2;
 
 public:
 	
@@ -38,10 +40,10 @@ public:
 		return theSecondInput;
 	}
 	void SetTheResults(int num) {
-		theReturnResult = num;
+		theReturnResult2 << num;
 	}
-	int GetTheResults() {
-		return theReturnResult;
+	wxString GetTheResults() {
+		return theReturnResult2;
 	}
 
 
@@ -97,6 +99,6 @@ public:
 		return binaryResults;
 	}
 
-	static int ClickEquals(int firstInput, int secondInput, std::string chosenOperand);
+	int ClickEquals(int firstInput, int secondInput);
 };
 
