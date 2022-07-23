@@ -4,14 +4,12 @@
 #pragma warning(disable : 4996)
 #include "wx/wx.h"
 
-//implement this class as a singleton design pattern per the Day 6 lecture
 class CalculatorProcessor 
 {
 private:
 	CalculatorProcessor() {};
 	static CalculatorProcessor* _processor;
 	int baseNumber = 0;
-	
 	int theFirstInput;
 	int theSecondInput;
 	int theReturnResult;
@@ -19,7 +17,7 @@ private:
 	int theCommand;
 
 public:
-#pragma region Getters & Setters
+#pragma region Getters, Setters, & GetInstance
 	static CalculatorProcessor* GetInstance() {
 		if (_processor == nullptr) {
 			_processor = new CalculatorProcessor();
@@ -30,33 +28,18 @@ public:
 		baseNumber = number; }
 	int GetBaseNumber() {
 		return baseNumber; }
-	
-	
-	
 	void SetFirstInput(int number) {
-		theFirstInput = number;
-	}
+		theFirstInput = number;	}
 	int GetFirstInput() {
-		return theFirstInput;
-	}
+		return theFirstInput;	}
 	void SetSecondInput(int number) {
-		theSecondInput = number;
-	}
+		theSecondInput = number;	}
 	int GetSecondInput() {
-		return theSecondInput;
-	}
-	void SetTheResults(int num) {
-		theReturnResult2 << num;
-	}
-	wxString GetTheResults() {
-		return theReturnResult2;
-	}
+		return theSecondInput;	}
 	void SetTheOperator(int opsID) {
-		theCommand = opsID;
-	}
+		theCommand = opsID;	}
 	int GetTheOperator() {
-		return theCommand;
-	}
+		return theCommand;	}
 #pragma endregion
 
 	CalculatorProcessor(CalculatorProcessor& copy) = delete;
@@ -64,6 +47,7 @@ public:
 	
 	int ClickEquals(int firstInput, int secondInput);
 	
+#pragma region Hex,Dec,Bin Methods
 	int GetDecimal(int firstInput) {
 		int remainder, decimal = 0, i = 0;
 		while (firstInput != 0) {
@@ -76,9 +60,9 @@ public:
 	}
 	std::string GetHexadecimal() {
 		std::string hexadecimalResults = "";
-		int number = baseNumber;
-		while (number > 0) {
-			int mod = number % 16;
+		GetBaseNumber();
+		while (baseNumber > 0) {
+			int mod = baseNumber % 16;
 			if (mod < 10) {
 				hexadecimalResults = std::to_string(mod) + hexadecimalResults;
 			}
@@ -100,7 +84,7 @@ public:
 			else if (mod == 15) {
 				hexadecimalResults = "F" + hexadecimalResults;
 			}
-			number = number / 16;
+			baseNumber = baseNumber / 16;
 		}
 		hexadecimalResults = "0x" + hexadecimalResults;
 		return hexadecimalResults;
@@ -119,7 +103,6 @@ public:
 		}
 		return binaryResults;
 	}
-
-	
+#pragma endregion
 };
 

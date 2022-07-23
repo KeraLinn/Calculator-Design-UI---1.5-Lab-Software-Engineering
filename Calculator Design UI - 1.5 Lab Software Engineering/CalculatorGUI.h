@@ -24,8 +24,6 @@ public:
 	
 	int firstInput = 0;
 	int secondInput = 0;
-	int theResults;
-	OperandAdd addOps;
 
 	int ValueFromTxtCtrlToInt(wxTextCtrl* display);
 	wxString IntToWXString(int x);

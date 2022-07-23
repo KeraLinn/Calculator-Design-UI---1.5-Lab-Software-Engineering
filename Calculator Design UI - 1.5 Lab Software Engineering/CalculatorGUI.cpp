@@ -7,7 +7,6 @@
 wxBEGIN_EVENT_TABLE(CalculatorGUI, wxFrame)
 EVT_COMMAND_RANGE(100, 123, wxEVT_COMMAND_BUTTON_CLICKED, CalculatorGUI::onButtonClick)
 
-
 wxEND_EVENT_TABLE()
 
 CalculatorGUI::CalculatorGUI() : wxFrame(nullptr, wxID_ANY, "Lab 1.5 - Calculator", wxPoint(400, 150), wxSize(500, 845)) {
@@ -98,7 +97,7 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 	CalculatorProcessor* processor = CalculatorProcessor::GetInstance();
 	
 	int theID = evt.GetId();
-	//100 = neg, 102 = dot, 103 = =,107 = +, 111 = -, 115 = *, 116 = ^2, 117 = |x|, 118 = %, 119 = /, 120 = hex, 121 = dec, 122 = bin, 123 = C
+	//numberButtonClicks
 	if (theID <= 111) {
 		switch (theID) {
 		case 100: {displayTextbox->AppendText(IntToWXString(0)); break; }
@@ -119,6 +118,7 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 		case 111: {displayTextbox->AppendText("."); break; }
 		}
 	}
+	//OperandButtonClicks
 	else if (theID > 112) {
 		switch (theID) {
 		//add
@@ -157,7 +157,8 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 			wxString finalAnswer = IntToWXString(theAnswer);
 			displayTextbox->AppendText(finalAnswer); 
 			break; }
-		case 117: { //absolute value
+		//absolute value
+		case 117: { 
 			int firstInput = ValueFromTxtCtrlToInt(displayTextbox);
 			processor->SetFirstInput(firstInput);
 			processor->SetTheOperator(theID);
@@ -186,13 +187,21 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 			displayTextbox->Clear(); break; }
 		//Hex
 		case 120: {
-			
-			processor->SetFirstInput(firstInput);
-			displayOperand->AppendText("Hex"); break; }
+			int firstInput = ValueFromTxtCtrlToInt(displayTextbox);
+			processor->SetBaseNumber(firstInput);
+			displayPrevInput->AppendText(IntToWXString(firstInput)); 
+			displayOperand->AppendText("Hex");
+			displayTextbox->Clear();
+			wxString myAnswer = (processor->GetHexadecimal());
+			displayTextbox->AppendText(myAnswer); 
+			break; }
 		//Dec
 		case 121: {
 			int firstInput = ValueFromTxtCtrlToInt(displayTextbox);
+			processor->SetBaseNumber(firstInput);
+			displayPrevInput->AppendText(IntToWXString(firstInput));
 			displayOperand->AppendText("Dec");
+			displayTextbox->Clear();
 			processor->GetDecimal(firstInput);
 			displayTextbox->AppendText(IntToWXString(processor->GetDecimal(firstInput)));
 			break; }
@@ -200,11 +209,9 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 		case 122: {
 			int firstInput = ValueFromTxtCtrlToInt(displayTextbox);
 			processor->SetBaseNumber(firstInput); 
-			
 			displayOperand->AppendText("Bin"); 
 			displayPrevInput->AppendText(IntToWXString(firstInput));
 			displayTextbox->Clear();
-			
 			std::string theAnswer = processor->GetBinary();
 			wxString finalAnswer(theAnswer);
 			displayTextbox->AppendText(finalAnswer); 
@@ -217,7 +224,8 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 			break; }
 		}
 	}
-	else { ///Equals Case
+	//EqualsButtonClick
+	else { 
 		int secondInput = ValueFromTxtCtrlToInt(displayTextbox);
 		processor->SetSecondInput(secondInput);
 		displayTextbox->Clear();
@@ -227,9 +235,8 @@ void CalculatorGUI::onButtonClick(wxCommandEvent& evt) {
 		
 		displayPrevInput->Clear();
 		displayOperand->Clear();
-		
 	}
-	///TODO: figure out how to get the displayTextbox to clear after you hit the equals buttong and then go to hit another button. But NOT change for like hex dec bin///
+	
 	evt.GetSkipped();
 }
 

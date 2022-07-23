@@ -6,9 +6,6 @@
 #include "OperandMod.h"
 #include "OperandSquared.h"
 #include "OperandSubtract.h"
-#include "BinaryTranslate.h"
-#include "HexadecimalTranslate.h"
-#include "DecimalTranslate.h"
 #include <vector>
 #include "IBaseCommand.h"
 
