@@ -30,6 +30,33 @@
     <ClInclude Include="CalculatorProcessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IBaseCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OperandAdd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OperandSubtract.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OperandMult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OperandDivide.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OperandMod.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OperandSquared.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OperandAbsoluteValue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CalculatorAppLaunch.cpp">
@@ -44,5 +71,13 @@
     <ClCompile Include="CalculatorProcessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="IBaseCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Calculator Design UI - 1.5 Lab Software Engineering.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

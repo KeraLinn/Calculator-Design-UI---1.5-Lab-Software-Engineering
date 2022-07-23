@@ -1,29 +1,76 @@
 #include "CalculatorProcessor.h"
-#include "ButtonFactory.h"
+#include "OperandMult.h"
+#include "OperandAbsoluteValue.h"
+#include "OperandAdd.h"
+#include "OperandDivide.h"
+#include "OperandMod.h"
+#include "OperandSquared.h"
+#include "OperandSubtract.h"
+#include <vector>
+#include "IBaseCommand.h"
 
-CalculatorProcessor* CalculatorProcessor::_processor = nullptr;
 
-int operandAdd(int a, int b) {
-	int resultsAdd = a + b;
-	return resultsAdd;
-}
-int operandSubtract(int a, int b) {
-	int resultsSubtract = a - b;
-	return resultsSubtract;
-}
-int operandMult(int a, int b) {
-	int resultsMult = a * b;
-	return resultsMult;
-}
-int operandDivide(int a, int b) {
-	int resultsDivide = a / b;
-	return resultsDivide;
-}
-int operandAbsVal(int a) {
-	int resultsAbsVal = abs(a);
-	return resultsAbsVal;
-}
-int operandSquareVal(int a) {
-	int resultsSquareVal = a * a;
-	return resultsSquareVal;
-}
+	CalculatorProcessor* CalculatorProcessor::_processor = nullptr;
+
+	std::vector<IBaseCommand*> commandQueue;
+
+	
+	int main()
+	{
+		OperandAdd AddCommand;
+		OperandSubtract SubtractCommand;
+		OperandDivide DivideCommand;
+		OperandMod ModCommand;
+		OperandMult MultCommand;
+		OperandSquared SquareCommand;
+		OperandAbsoluteValue AbsValCommand;
+
+		commandQueue.push_back(&AddCommand);
+		commandQueue.push_back(&SubtractCommand);
+		commandQueue.push_back(&DivideCommand);
+		commandQueue.push_back(&ModCommand);
+		commandQueue.push_back(&MultCommand);
+		commandQueue.push_back(&SquareCommand);
+		commandQueue.push_back(&AbsValCommand);
+
+	}
+	int CalculatorProcessor::ClickEquals(int firstInput, int secondInput)
+	{		
+		int theResults;
+		_processor->SetFirstInput(firstInput);
+		_processor->SetSecondInput(secondInput);
+		
+		switch (_processor->GetTheOperator()) {
+		case 113: {
+			OperandAdd myOps;
+			theResults = myOps.Execute();
+			break;	}
+		case 114: {
+			OperandSubtract myOps;
+			theResults = myOps.Execute();
+			break;	}
+		case 115: {
+			OperandMult myOps;
+			theResults = myOps.Execute();
+			break;	}
+		case 116: {
+			OperandSquared myOps;
+			theResults = myOps.Execute();
+			break;	}
+		case 117: {
+			OperandAbsoluteValue myOps;
+			theResults = myOps.Execute();
+			break;	}
+		case 118: {
+			OperandMod myOps;
+			theResults = myOps.Execute();
+			break;	}
+		case 119: {
+			OperandDivide myOps;
+			theResults = myOps.Execute();
+			break;	}
+		}
+
+		return theResults;
+	}
+

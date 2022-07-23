@@ -1,17 +1,23 @@
 #pragma once
-#pragma warning(disable : 4996)
 #include <string>
+#include <vector>
+#pragma warning(disable : 4996)
+#include "wx/wx.h"
 
-//implement this class as a singleton design pattern per the Day 6 lecture
-class CalculatorProcessor
+class CalculatorProcessor 
 {
 private:
-	CalculatorProcessor() {}
+	CalculatorProcessor() {};
 	static CalculatorProcessor* _processor;
 	int baseNumber = 0;
+	int theFirstInput;
+	int theSecondInput;
+	int theReturnResult;
+	wxString theReturnResult2;
+	int theCommand;
 
 public:
-	
+#pragma region Getters, Setters, & GetInstance
 	static CalculatorProcessor* GetInstance() {
 		if (_processor == nullptr) {
 			_processor = new CalculatorProcessor();
@@ -19,26 +25,44 @@ public:
 		return _processor;
 	}
 	void SetBaseNumber(int number) {
-		baseNumber = number;
-	}
-	int operandAdd(int a, int b);
-	int operandSubtract(int a, int b);
-	int operandMult(int a, int b);
-	int operandDivide(int a, int b);
-	int operandAbsVal(int a);
-	int operandSquareVal(int a);
+		baseNumber = number; }
+	int GetBaseNumber() {
+		return baseNumber; }
+	void SetFirstInput(int number) {
+		theFirstInput = number;	}
+	int GetFirstInput() {
+		return theFirstInput;	}
+	void SetSecondInput(int number) {
+		theSecondInput = number;	}
+	int GetSecondInput() {
+		return theSecondInput;	}
+	void SetTheOperator(int opsID) {
+		theCommand = opsID;	}
+	int GetTheOperator() {
+		return theCommand;	}
+#pragma endregion
 
 	CalculatorProcessor(CalculatorProcessor& copy) = delete;
 	void operator=(const CalculatorProcessor& assign) = delete;
-
-	std::string GetDecimal() {
-		return std::to_string(baseNumber);
+	
+	int ClickEquals(int firstInput, int secondInput);
+	
+#pragma region Hex,Dec,Bin Methods
+	int GetDecimal(int firstInput) {
+		int remainder, decimal = 0, i = 0;
+		while (firstInput != 0) {
+			remainder = firstInput % 10;
+			firstInput /= 10;
+			decimal += remainder * pow(2, i);
+			++i;
+		}
+		return decimal;
 	}
 	std::string GetHexadecimal() {
 		std::string hexadecimalResults = "";
-		int number = baseNumber;
-		while (number > 0) {
-			int mod = number % 16;
+		GetBaseNumber();
+		while (baseNumber > 0) {
+			int mod = baseNumber % 16;
 			if (mod < 10) {
 				hexadecimalResults = std::to_string(mod) + hexadecimalResults;
 			}
@@ -60,26 +84,25 @@ public:
 			else if (mod == 15) {
 				hexadecimalResults = "F" + hexadecimalResults;
 			}
-			number = number / 16;
+			baseNumber = baseNumber / 16;
 		}
 		hexadecimalResults = "0x" + hexadecimalResults;
 		return hexadecimalResults;
 	}
 	std::string GetBinary() {
 		std::string binaryResults = "";
-		int number = baseNumber;
+		GetBaseNumber();
 		for (int i = 0; i < 32; i++) {
-			if (number % 2 == 0) {
+			if (baseNumber % 2 == 0) {
 				binaryResults = "0" + binaryResults;
 			}
 			else {
 				binaryResults = "1" + binaryResults;
 			}
-			number = number / 2;
+			baseNumber = baseNumber / 2;
 		}
 		return binaryResults;
 	}
-
-
+#pragma endregion
 };
 

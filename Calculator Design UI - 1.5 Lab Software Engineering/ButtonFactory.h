@@ -1,6 +1,7 @@
 #pragma once
 #include "wx/wx.h"
 #include "CalculatorGUI.h"
+#include <map>
 
 class ButtonFactory
 {
@@ -8,8 +9,10 @@ private:
 	wxWindowBase* _parentWindow;
 
 public:
-	//void Bind(wxCommandEvent& evt);
-	wxButton* CreateButtonNeg(CalculatorGUI* parentWindow); 
+	
+	//static std::map<int, wxString> allButtonsMap;
+
+	wxButton* CreateButtonNeg(CalculatorGUI* parentWindow);
 	wxButton* CreateButton0(CalculatorGUI* parentWindow);
 	wxButton* CreateButtonDot(CalculatorGUI* parentWindow);
 	wxButton* CreateButtonEquals(CalculatorGUI* parentWindow);
