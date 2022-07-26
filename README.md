@@ -13,3 +13,5 @@ Created for Software Engineering class at Full Sail University, Term C202207, Se
 7/23/2022 Per lab instructions, create abstract interface base class with at least 1 pure virtual function called Execute() that will be responsible for running the commands created by each operand function (+,-,*,/). These commands are stored in a vector inside the CalculatorProcessor. Completed method implementation for operands (including my extra x^2 and |x|), the Hexadecimal, Decimal, and Binary function buttons, and the equal button. Updated the original design to show a displayOperand and previousInput when using the calculator.
 
 Example usage for new design: When inputting 2 + 3, clicking 2 displays the number in the main display area. Upon clicking the + button, the 2 is moved to the PreviousInput display area and the + is moved to the Operand display area, while the main display remains blank for next input. PreviousInput and Operand display areas are labeled for clarity.
+
+7/26 Per lab instructions, create and implement unit tests to test the calculator logic.
